@@ -18,13 +18,13 @@ import {
 const processSteps = ['Verkennen', 'Verbinden', 'Formeren', 'Creeren', 'Verduurzamen'];
 
 const marqueeImages = [
-    { src: '/images/Marquee/ibu1.png', width: 1620, height: 1080 },
-    { src: '/images/Marquee/ibu2.png', width: 1604, height: 1080 },
-    { src: '/images/Marquee/ibu3.png', width: 1620, height: 1080 },
-    { src: '/images/Marquee/ibu4.png', width: 1620, height: 1080 },
-    { src: '/images/Marquee/ibu5.png', width: 1620, height: 1080 },
-    { src: '/images/Marquee/ibu6.png', width: 1620, height: 1080 },
-    { src: '/images/Marquee/ibu7.png', width: 1620, height: 1080 }
+    { src: '/images/Marquee/ibu1.webp', width: 1620, height: 1080 },
+    { src: '/images/Marquee/ibu2.webp', width: 1604, height: 1080 },
+    { src: '/images/Marquee/ibu3.webp', width: 1620, height: 1080 },
+    { src: '/images/Marquee/ibu4.webp', width: 1620, height: 1080 },
+    { src: '/images/Marquee/ibu5.webp', width: 1620, height: 1080 },
+    { src: '/images/Marquee/ibu6.webp', width: 1620, height: 1080 },
+    { src: '/images/Marquee/ibu7.webp', width: 1620, height: 1080 }
 ];
 
 const services = [
@@ -91,15 +91,14 @@ const HomePage: React.FC = () => {
                     loop
                     muted
                     playsInline
-                    poster='/images/Hero.png'
                     aria-label='Ibu Bos hero video'>
-                    <source src='/images/Hero.mp4' type='video/mp4' />
+                    <source src='/images/Hero.webm' type='video/webm' />
                 </video>
                 <div className='absolute inset-0 bg-[#E88A32]/18' />
                 <div className='relative mx-auto flex min-h-screen w-full max-w-7xl flex-col items-center justify-center px-5 pb-8 pt-28 text-center sm:px-8 lg:px-10'>
                     <div className='flex max-w-4xl flex-col items-center text-[#FDF5E2] drop-shadow-[0_2px_18px_rgba(0,0,0,0.28)]'>
                         <Image
-                            src='/images/Logo.png'
+                            src='/images/Logo.webp'
                             alt='Ibu Bos logo'
                             width={540}
                             height={540}
@@ -135,7 +134,7 @@ const HomePage: React.FC = () => {
                     </div>
                     <aside className='editorial-aside'>
                         <Image
-                            src='/images/over%20ibu.png'
+                            src='/images/over%20ibu.webp'
                             alt='Maartje Bos van Ibu Bos'
                             width={2500}
                             height={1667}
@@ -150,7 +149,7 @@ const HomePage: React.FC = () => {
                 <div className='mx-auto max-w-7xl'>
                     <div className='grid gap-6 sm:gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center'>
                         <Image
-                            src='/images/cocreatieveaanpak.png'
+                            src='/images/cocreatieveaanpak.webp'
                             alt='Co-creatieve aanpak sessie'
                             width={2688}
                             height={1536}
@@ -240,7 +239,7 @@ const HomePage: React.FC = () => {
                             })}
                         </div>
                         <Image
-                            src='/images/teammoment.png'
+                            src='/images/teammoment.webp'
                             alt='Ibu Bos teammoment'
                             width={2500}
                             height={1667}
@@ -255,7 +254,7 @@ const HomePage: React.FC = () => {
                 <div className='mx-auto grid max-w-7xl gap-8 sm:gap-14 lg:grid-cols-[1fr_1fr] lg:items-center'>
                     <div className='space-y-5 sm:space-y-7'>
                         <Image
-                            src='/images/Resilient%20cities.png'
+                            src='/images/Resilient%20cities.webp'
                             alt='Resilient cities'
                             width={1920}
                             height={1080}
@@ -292,7 +291,7 @@ const HomePage: React.FC = () => {
                 <div className='mx-auto grid max-w-7xl gap-8 sm:gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:items-center'>
                     <div className='project-media'>
                         <Image
-                            src='/images/lokaalgeld.png'
+                            src='/images/lokaalgeld.webp'
                             alt='Lokaal Geld Zuidoost'
                             width={2500}
                             height={1667}
@@ -310,10 +309,16 @@ const HomePage: React.FC = () => {
                             Ibu Bos met partners een consortium op en schreef een manifest rond gedeelde waarden en een
                             gezamenlijk droombeeld.
                         </p>
-                        <p className='podcast-note'>
+                        <a
+                            className='podcast-note'
+                            href='https://open.spotify.com/episode/1nYkOz5Y4Daz45F6ktqFYD?si=BHSynye4SMeUYt_RLLrVcg&dl_branch=1&nd=1'
+                            target='_blank'
+                            rel='noopener noreferrer'
+                            aria-label='Luister naar de podcast over Lokaal Geld Zuidoost op Spotify'
+                        >
                             <Mic2 aria-hidden className='h-6 w-6' />
-                            Interesse in deze aanpak? Vraag Maartje naar de podcast en de lessen uit het project.
-                        </p>
+                            Interesse in deze aanpak? Luister naar de podcast en de lessen uit het project.
+                        </a>
                     </div>
                 </div>
             </section>

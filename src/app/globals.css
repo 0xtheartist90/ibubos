@@ -232,7 +232,7 @@
   .texture-section::before {
     background:
       linear-gradient(rgba(21, 88, 59, 0.78), rgba(21, 88, 59, 0.82)),
-      url("/images/BG.png") center / cover;
+      url("/images/BG.webp") center / cover;
     content: "";
     inset: 0;
     position: absolute;
@@ -411,6 +411,12 @@
     font-weight: 800;
     gap: 0.75rem;
     line-height: 1.45;
+    text-decoration: none;
+    transition: color 180ms ease;
+  }
+
+  .podcast-note:hover {
+    color: var(--ibu-green);
   }
 
   .map-frame {

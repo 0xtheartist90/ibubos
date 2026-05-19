@@ -25,8 +25,9 @@ export const metadata: Metadata = {
     description:
         'Ibu Bos helpt steden, communities en organisaties met duurzame ontwikkeling, zelforganisatie en inclusieve groei.',
     icons: {
-        icon: '/images/favicon.png',
-        apple: '/images/favicon.png'
+        icon: '/favicon.ico',
+        shortcut: '/favicon.ico',
+        apple: '/images/favicon.webp'
     }
 };
 
