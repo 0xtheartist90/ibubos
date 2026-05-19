@@ -23,7 +23,11 @@ const geistMono = localFont({
 export const metadata: Metadata = {
     title: 'Ibu Bos | Resilient cities en co-creatie',
     description:
-        'Ibu Bos helpt steden, communities en organisaties met duurzame ontwikkeling, zelforganisatie en inclusieve groei.'
+        'Ibu Bos helpt steden, communities en organisaties met duurzame ontwikkeling, zelforganisatie en inclusieve groei.',
+    icons: {
+        icon: '/images/favicon.png',
+        apple: '/images/favicon.png'
+    }
 };
 
 const Layout = ({ children }: Readonly<{ children: ReactNode }>) => {
