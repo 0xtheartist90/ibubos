@@ -1,104 +1,393 @@
 import Image from 'next/image';
+import {
+    Camera,
+    Compass,
+    Handshake,
+    Leaf,
+    Mail,
+    Map,
+    MapPin,
+    Mic2,
+    Phone,
+    Sparkles,
+    Sprout,
+    Target,
+    UsersRound
+} from 'lucide-react';
 
-import ExtensionDetails from '@/app/(delete-this-and-modify-page.tsx)/ExtensionDetails';
-import SetupDetails from '@/app/(delete-this-and-modify-page.tsx)/SetupDetails';
+const processSteps = ['Verkennen', 'Verbinden', 'Formeren', 'Creeren', 'Verduurzamen'];
+
+const marqueeImages = [
+    { src: '/images/Marquee/ibu1.png', width: 1620, height: 1080 },
+    { src: '/images/Marquee/ibu2.png', width: 1604, height: 1080 },
+    { src: '/images/Marquee/ibu3.png', width: 1620, height: 1080 },
+    { src: '/images/Marquee/ibu4.png', width: 1620, height: 1080 },
+    { src: '/images/Marquee/ibu5.png', width: 1620, height: 1080 },
+    { src: '/images/Marquee/ibu6.png', width: 1620, height: 1080 },
+    { src: '/images/Marquee/ibu7.png', width: 1620, height: 1080 }
+];
+
+const services = [
+    {
+        icon: Compass,
+        title: 'Programma ontwikkeling',
+        text: 'Van vraagstuk naar gedragen richting, met ruimte voor complexiteit.'
+    },
+    {
+        icon: UsersRound,
+        title: 'Co-creatie en facilitering',
+        text: 'Sessies waarin groepen elkaar vinden en scherpe keuzes kunnen maken.'
+    },
+    {
+        icon: Leaf,
+        title: 'Veerkrachtstrategie',
+        text: 'Analyse, prioriteiten en concrete stappen voor duurzame inbedding.'
+    }
+];
+
+const expectations = [
+    { icon: Compass, text: 'Scherpe vragen' },
+    { icon: Sparkles, text: 'Speelse energie' },
+    { icon: Target, text: 'Strategie naar actie' }
+];
+
+const resilienceThemes = [
+    { icon: Handshake, text: 'Sterke samenwerkingsverbanden' },
+    { icon: Sprout, text: 'Living labs voor innovatie' },
+    { icon: Map, text: 'Veerkrachtanalyse en implementatie' }
+];
+
+const contactDetails = [
+    'Maartje Bos',
+    'KvK 66418887',
+    'BTW NL002126942B60'
+];
+
+const PhotoPlaceholder = ({
+    label,
+    eyebrow = 'Beeldruimte',
+    className = ''
+}: {
+    label: string;
+    eyebrow?: string;
+    className?: string;
+}) => (
+    <div className={`photo-placeholder ${className}`}>
+        <div className='photo-placeholder__label'>
+            <Camera aria-hidden className='h-5 w-5' />
+            <span>{eyebrow}</span>
+        </div>
+        <span className='photo-placeholder__title'>{label}</span>
+    </div>
+);
 
 const HomePage: React.FC = () => {
     return (
-        <main className='mx-auto mt-6 flex max-w-7xl flex-col justify-center gap-6 px-3 font-[family-name:var(--font-geist-sans)] sm:mt-3 sm:gap-12 sm:px-0'>
-            <div className='mb-4 rounded-lg border border-yellow-400 bg-yellow-50 p-4 text-yellow-800 dark:border-yellow-600 dark:bg-yellow-900/30 dark:text-yellow-200'>
-                <strong>⚠️ ARCHIVED:</strong> This project has been archived. Please use the{' '}
-                <a
-                    href='https://github.com/siddharthamaity/nextjs-16-starter-shadcn'
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    className='font-semibold underline hover:text-yellow-900 dark:hover:text-yellow-100'>
-                    Next.js 16 Starter (shadcn)
-                </a>{' '}
-                instead.
-            </div>
-            <div className='justify-centersm:items-start row-start-2 flex flex-col items-center gap-8'>
-                <div className='flex items-center gap-4'>
-                    <Image
-                        className='h-6 sm:h-8 dark:invert'
-                        src='/next.svg'
-                        alt='Next.js logo'
-                        width={180}
-                        height={38}
-                        priority
-                    />
-                    <h6 className='text-3xl font-bold'>+</h6>
-                    {/* prettier-ignore */}
-                    <div className="mr-4 flex items-center space-x-2 lg:mr-6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" className="size-10"><rect width="256" height="256" fill="none"></rect><line x1="208" y1="128" x2="128" y2="208" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"></line><line x1="192" y1="40" x2="40" y2="192" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"></line></svg><span className="font-bold text-2xl">shadcn/ui</span></div>
-                </div>
-                <ol className='list-inside list-decimal text-center font-[family-name:var(--font-geist-mono)] text-sm sm:text-left'>
-                    <li className='mb-2'>
-                        Get started by editing{' '}
-                        <code className='rounded bg-black/[.05] px-1 py-0.5 font-semibold dark:bg-white/[.06]'>
-                            src/app/page.tsx
-                        </code>
-                        .
-                    </li>
-                    <li>Save and see your changes instantly.</li>
-                </ol>
-                <div className='flex items-center gap-4'>
-                    <a
-                        className='flex h-10 flex-wrap items-center justify-center gap-2 gap-x-3 rounded-full border border-solid border-transparent bg-neutral-200 px-4 text-sm transition-colors hover:bg-neutral-300 sm:h-12 sm:px-5 sm:text-base dark:bg-neutral-700 dark:hover:bg-neutral-600'
-                        href='https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app'
-                        target='_blank'
-                        rel='noopener noreferrer'>
+        <main className='font-brand text-brand-green'>
+            <section id='home' className='relative min-h-screen overflow-hidden bg-[#FDF5E2]'>
+                <video
+                    className='absolute inset-0 h-full w-full object-cover object-center'
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    poster='/images/Hero.png'
+                    aria-label='Ibu Bos hero video'>
+                    <source src='/images/Hero.mp4' type='video/mp4' />
+                </video>
+                <div className='absolute inset-0 bg-[#E88A32]/18' />
+                <div className='relative mx-auto flex min-h-screen w-full max-w-7xl flex-col items-center justify-center px-5 pb-8 pt-28 text-center sm:px-8 lg:px-10'>
+                    <div className='flex max-w-4xl flex-col items-center text-[#FDF5E2] drop-shadow-[0_2px_18px_rgba(0,0,0,0.28)]'>
                         <Image
-                            className='invert dark:invert-0'
-                            src='/vercel.svg'
-                            alt='Vercel logomark'
-                            width={20}
-                            height={20}
+                            src='/images/Logo.png'
+                            alt='Ibu Bos logo'
+                            width={540}
+                            height={540}
+                            priority
+                            className='mb-5 h-64 w-64 sm:h-80 sm:w-80 lg:h-[27rem] lg:w-[27rem]'
                         />
-                        Deploy now
-                    </a>
-                    <a
-                        className='flex h-10 items-center justify-center rounded-full border border-solid border-black/[.08] px-4 text-sm transition-colors hover:border-transparent hover:bg-[#f2f2f2] sm:h-12 sm:min-w-44 sm:px-5 sm:text-base dark:border-white/[.145] dark:hover:bg-[#1a1a1a]'
-                        href='https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app'
-                        target='_blank'
-                        rel='noopener noreferrer'>
-                        Read Next.js docs
-                    </a>
+                        <p className='max-w-2xl text-xl font-bold leading-8 text-[#FDF5E2] sm:text-2xl'>
+                            Voor duurzame ontwikkeling, zelforganisatie en inclusieve groei. Samen bouwen we aan
+                            veerkrachtige steden voor de 21e eeuw.
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div className='row-start-3 hidden flex-wrap items-center justify-center gap-6 sm:flex'>
-                <a
-                    className='flex items-center gap-2 hover:underline hover:underline-offset-4'
-                    href='https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app'
-                    target='_blank'
-                    rel='noopener noreferrer'>
-                    <Image aria-hidden src='/file.svg' alt='File icon' width={16} height={16} />
-                    Learn
-                </a>
-                <a
-                    className='flex items-center gap-2 hover:underline hover:underline-offset-4'
-                    href='https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app'
-                    target='_blank'
-                    rel='noopener noreferrer'>
-                    <Image aria-hidden src='/window.svg' alt='Window icon' width={16} height={16} />
-                    Examples
-                </a>
-                <a
-                    className='flex items-center gap-2 hover:underline hover:underline-offset-4'
-                    href='https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app'
-                    target='_blank'
-                    rel='noopener noreferrer'>
-                    <Image aria-hidden src='/globe.svg' alt='Globe icon' width={16} height={16} />
-                    Go to nextjs.org →
-                </a>
-            </div>
-            <div className='space-y-6'>
-                <h2 className='text-center text-lg'>Whats included?</h2>
-                <SetupDetails />
-            </div>
-            <div className='space-y-6'>
-                <h2 className='text-center text-lg'>VS Code Extensions</h2>
-                <ExtensionDetails />
-            </div>
+            </section>
+
+            <section id='over' className='bg-[#FDF5E2] px-5 py-12 sm:px-8 sm:py-20 lg:px-10'>
+                <div className='mx-auto grid max-w-7xl gap-8 sm:gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:items-center'>
+                    <div className='max-w-2xl'>
+                        <p className='section-kicker'>Over Ibu Bos</p>
+                        <h2 className='mt-3 max-w-xl text-3xl font-extrabold leading-tight sm:mt-4 sm:text-6xl'>
+                            Groei begint bij wat mensen te bieden hebben.
+                        </h2>
+                        <div className='mt-5 space-y-4 text-base leading-7 sm:mt-8 sm:space-y-6 sm:text-xl sm:leading-8'>
+                            <p>
+                                Ibu Bos is ontstaan uit het verlangen van pionier, co-creator en community bouwer
+                                Maartje Bos naar een veerkrachtige samenleving waar ieders waarde zichtbaar wordt.
+                            </p>
+                            <p>
+                                Ibu betekent groei in het Igbo. In het Indonesisch betekent Ibu moeder en krachtige
+                                vrouw: precies de combinatie van bedding, beweging en moed die in het werk centraal
+                                staat.
+                            </p>
+                        </div>
+                    </div>
+                    <aside className='editorial-aside'>
+                        <Image
+                            src='/images/over%20ibu.png'
+                            alt='Maartje Bos van Ibu Bos'
+                            width={2500}
+                            height={1667}
+                            sizes='(max-width: 1024px) 100vw, 42vw'
+                            className='editorial-image'
+                        />
+                    </aside>
+                </div>
+            </section>
+
+            <section id='werkwijze' className='texture-section px-5 py-12 text-[#FDF5E2] sm:px-8 sm:py-20 lg:px-10'>
+                <div className='mx-auto max-w-7xl'>
+                    <div className='grid gap-6 sm:gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center'>
+                        <Image
+                            src='/images/cocreatieveaanpak.png'
+                            alt='Co-creatieve aanpak sessie'
+                            width={2688}
+                            height={1536}
+                            sizes='(max-width: 1024px) 100vw, 42vw'
+                            className='editorial-image editorial-image--wide'
+                        />
+                        <div className='max-w-3xl'>
+                            <p className='section-kicker text-[#FDF5E2]/80'>De co-creatieve aanpak</p>
+                            <h2 className='mt-3 text-3xl font-extrabold leading-tight sm:mt-4 sm:text-6xl'>
+                                Van eerste vraag naar gedragen verandering.
+                            </h2>
+                            <p className='mt-4 text-base leading-7 text-[#FDF5E2]/90 sm:mt-6 sm:text-xl sm:leading-8'>
+                                Ibu Bos helpt teams, wijken, dorpen en steden om samen te werken aan wat ertoe doet.
+                                Met waarderende vragen, heldere structuur en ruimte voor de spanning die bij echte
+                                verandering hoort.
+                            </p>
+                        </div>
+                    </div>
+                    <div className='mt-8 grid grid-cols-2 gap-3 sm:mt-12 md:grid-cols-5'>
+                        {processSteps.map((step, index) => (
+                            <div key={step} className='border-t border-[#FDF5E2]/45 pt-3 sm:pt-5'>
+                                <span className='text-sm font-bold text-[#E88A32]'>0{index + 1}</span>
+                                <h3 className='mt-1 text-xl font-extrabold sm:mt-3 sm:text-2xl'>{step}</h3>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            <section aria-label='Ibu Bos fotogalerij' className='overflow-hidden bg-[#FDF5E2] py-0'>
+                <div className='marquee-track'>
+                    {[...marqueeImages, ...marqueeImages].map((image, index) => (
+                        <Image
+                            key={`${image.src}-${index}`}
+                            src={image.src}
+                            alt=''
+                            width={image.width}
+                            height={image.height}
+                            sizes='(max-width: 768px) 78vw, 34vw'
+                            className='marquee-image'
+                        />
+                    ))}
+                </div>
+            </section>
+
+            <section id='aanbod' className='bg-[#FDF5E2] px-5 py-12 sm:px-8 sm:py-20 lg:px-10'>
+                <div className='mx-auto max-w-7xl'>
+                    <div className='grid gap-6 sm:gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:items-end'>
+                        <div>
+                            <p className='section-kicker'>Werk met mij</p>
+                            <h2 className='mt-3 text-3xl font-extrabold leading-tight sm:mt-4 sm:text-6xl'>
+                                Programma ontwikkeling, facilitering en veerkrachtstrategie.
+                            </h2>
+                        </div>
+                        <div className='space-y-4 text-base leading-7 sm:space-y-6 sm:text-xl sm:leading-8'>
+                            <p>
+                                Zoek je verdieping, een vernieuwende way of working of de volgende stap met je team?
+                                Maartje levert aanbod op maat en training in company.
+                            </p>
+                            <div className='flex flex-wrap gap-3'>
+                                {expectations.map((expectation) => {
+                                    const Icon = expectation.icon;
+
+                                    return (
+                                        <span key={expectation.text} className='icon-chip'>
+                                            <Icon aria-hidden className='h-4 w-4' />
+                                            {expectation.text}
+                                        </span>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className='mt-8 grid gap-6 sm:mt-12 sm:gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch'>
+                        <div className='service-composition'>
+                            {services.map((service) => {
+                                const Icon = service.icon;
+
+                                return (
+                                    <div key={service.title} className='icon-panel'>
+                                        <Icon aria-hidden className='h-7 w-7 text-[#E88A32]' />
+                                        <h3>{service.title}</h3>
+                                        <p>{service.text}</p>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                        <Image
+                            src='/images/teammoment.png'
+                            alt='Ibu Bos teammoment'
+                            width={2500}
+                            height={1667}
+                            sizes='(max-width: 1024px) 100vw, 42vw'
+                            className='editorial-image mobile-compact-image'
+                        />
+                    </div>
+                </div>
+            </section>
+
+            <section id='resilient-cities' className='texture-section texture-section--flipped px-5 py-12 text-[#FDF5E2] sm:px-8 sm:py-20 lg:px-10'>
+                <div className='mx-auto grid max-w-7xl gap-8 sm:gap-14 lg:grid-cols-[1fr_1fr] lg:items-center'>
+                    <div className='space-y-5 sm:space-y-7'>
+                        <Image
+                            src='/images/Resilient%20cities.png'
+                            alt='Resilient cities'
+                            width={1920}
+                            height={1080}
+                            sizes='(max-width: 1024px) 100vw, 48vw'
+                            className='editorial-image editorial-image--wide'
+                        />
+                        <p className='max-w-xl text-base leading-7 sm:text-xl sm:leading-8'>
+                            Sta je aan het begin van een samenwerking, heb je een maatschappelijk vraagstuk of wil je
+                            een living lab bouwen? Ibu Bos helpt bij analyse, strategie en duurzame inbedding.
+                        </p>
+                    </div>
+                    <div>
+                        <p className='section-kicker text-[#FDF5E2]/80'>Resilient cities</p>
+                        <h2 className='mt-3 text-3xl font-extrabold leading-tight sm:mt-4 sm:text-6xl'>
+                            Klaar zijn voor de kansen en uitdagingen van de toekomst.
+                        </h2>
+                        <div className='mt-6 grid gap-3 sm:mt-8 sm:grid-cols-3 sm:gap-4 lg:grid-cols-1'>
+                            {resilienceThemes.map((theme) => {
+                                const Icon = theme.icon;
+
+                                return (
+                                    <div key={theme.text} className='texture-icon-row'>
+                                        <Icon aria-hidden className='h-5 w-5 text-[#E88A32]' />
+                                        <span>{theme.text}</span>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id='projecten' className='bg-[#FDF5E2] px-5 py-12 sm:px-8 sm:py-20 lg:px-10'>
+                <div className='mx-auto grid max-w-7xl gap-8 sm:gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:items-center'>
+                    <div className='project-media'>
+                        <Image
+                            src='/images/lokaalgeld.png'
+                            alt='Lokaal Geld Zuidoost'
+                            width={2500}
+                            height={1667}
+                            sizes='(max-width: 1024px) 100vw, 52vw'
+                            className='editorial-image'
+                        />
+                    </div>
+                    <div className='space-y-4 sm:space-y-6'>
+                        <p className='section-kicker'>Recent project</p>
+                        <h2 className='mt-3 text-3xl font-extrabold leading-tight sm:mt-4 sm:text-6xl'>
+                            Lokaal Geld Zuidoost laat zien hoe co-creatie waarde vasthoudt in de community.
+                        </h2>
+                        <p className='text-base leading-7 sm:text-xl sm:leading-8'>
+                            Vanuit de behoefte om te onderzoeken hoe meer waarde in de community kan blijven, bouwde
+                            Ibu Bos met partners een consortium op en schreef een manifest rond gedeelde waarden en een
+                            gezamenlijk droombeeld.
+                        </p>
+                        <p className='podcast-note'>
+                            <Mic2 aria-hidden className='h-6 w-6' />
+                            Interesse in deze aanpak? Vraag Maartje naar de podcast en de lessen uit het project.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section id='contact' className='texture-section px-5 py-12 text-[#FDF5E2] sm:px-8 sm:py-16 lg:px-10'>
+                <div className='mx-auto grid max-w-7xl gap-8 sm:gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center'>
+                    <div>
+                        <p className='section-kicker text-[#FDF5E2]/80'>Contact</p>
+                        <h2 className='mt-3 text-3xl font-extrabold leading-tight sm:text-6xl'>
+                            Zullen we samen kijken wat er nodig is?
+                        </h2>
+                        <p className='mt-4 max-w-xl text-base leading-7 text-[#FDF5E2]/90 sm:mt-5 sm:text-xl sm:leading-8'>
+                            Wil je sparren over een samenwerking, training of vraagstuk? Stuur een bericht en Maartje
+                            neemt contact met je op.
+                        </p>
+                        <div className='mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row'>
+                            <a className='brand-button' href='mailto:maartje.ibubos@gmail.com'>
+                                <Mail aria-hidden className='mr-2 h-5 w-5' />
+                                Mail Maartje
+                            </a>
+                            <a className='brand-button brand-button--ghost' href='tel:+31619039645'>
+                                <Phone aria-hidden className='mr-2 h-5 w-5' />
+                                Bel direct
+                            </a>
+                        </div>
+                        <p className='mt-5 inline-flex items-center gap-2 text-sm font-bold text-[#FDF5E2]/85 sm:mt-6 sm:text-base'>
+                            <MapPin aria-hidden className='h-5 w-5 text-[#E88A32]' />
+                            Heesterveld 132A, Amsterdam
+                        </p>
+                    </div>
+                    <div className='map-frame'>
+                        <a
+                            className='map-link-card'
+                            href='https://www.google.com/maps/search/?api=1&query=Heesterveld%20132A%2C%20Amsterdam'
+                            target='_blank'
+                            rel='noreferrer'>
+                            <MapPin aria-hidden className='h-6 w-6 text-[#E88A32]' />
+                            <span>Open Heesterveld 132A in Google Maps</span>
+                        </a>
+                        <iframe
+                            title='Kaart naar Ibu Bos'
+                            src='https://www.google.com/maps?q=Heesterveld%20132A%2C%20Amsterdam&output=embed'
+                            loading='lazy'
+                            referrerPolicy='no-referrer-when-downgrade'
+                        />
+                    </div>
+                </div>
+            </section>
+
+            <footer className='bg-[#FDF5E2] px-5 py-6 text-[#15583B] sm:px-8 lg:px-10'>
+                <div className='mx-auto flex max-w-7xl flex-col gap-4 text-sm font-semibold sm:flex-row sm:items-center sm:justify-between'>
+                    <div className='flex flex-wrap gap-x-5 gap-y-2'>
+                        {contactDetails.map((detail) => (
+                            <span key={detail}>
+                                {detail}
+                            </span>
+                        ))}
+                    </div>
+                    <div className='flex flex-wrap gap-x-5 gap-y-2'>
+                        <a
+                            className='text-[#E88A32] underline-offset-4 hover:underline'
+                            href='mailto:maartje.ibubos@gmail.com'>
+                            maartje.ibubos@gmail.com
+                        </a>
+                        <a
+                            className='text-[#E88A32] underline-offset-4 hover:underline'
+                            href='https://www.linkedin.com/in/maartjebos'
+                            target='_blank'
+                            rel='noreferrer'>
+                            LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </footer>
         </main>
     );
 };
