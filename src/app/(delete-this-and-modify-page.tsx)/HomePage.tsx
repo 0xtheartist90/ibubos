@@ -92,7 +92,7 @@ const HomePage: React.FC = () => {
                     muted
                     playsInline
                     aria-label='Ibu Bos hero video'>
-                    <source src='/images/Hero.webm' type='video/webm' />
+                    <source src='/images/Hero2.webm' type='video/webm' />
                 </video>
                 <div className='absolute inset-0 bg-[#E88A32]/18' />
                 <div className='relative mx-auto flex min-h-screen w-full max-w-7xl flex-col items-center justify-center px-5 pb-8 pt-28 text-center sm:px-8 lg:px-10'>
