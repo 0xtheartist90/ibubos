@@ -6,7 +6,6 @@ import {
     Leaf,
     Mail,
     Map,
-    MapPin,
     Mic2,
     Phone,
     Sparkles,
@@ -92,7 +91,7 @@ const HomePage: React.FC = () => {
                     muted
                     playsInline
                     aria-label='Ibu Bos hero video'>
-                    <source src='/images/Hero2.webm' type='video/webm' />
+                    <source src='/images/Hero3.webm' type='video/webm' />
                 </video>
                 <div className='absolute inset-0 bg-[#E88A32]/18' />
                 <div className='relative mx-auto flex min-h-screen w-full max-w-7xl flex-col items-center justify-center px-5 pb-8 pt-28 text-center sm:px-8 lg:px-10'>
@@ -147,18 +146,24 @@ const HomePage: React.FC = () => {
 
             <section id='werkwijze' className='texture-section px-5 py-12 text-[#FDF5E2] sm:px-8 sm:py-20 lg:px-10'>
                 <div className='mx-auto max-w-7xl'>
-                    <div className='grid gap-6 sm:gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center'>
-                        <Image
-                            src='/images/cocreatieveaanpak.webp'
-                            alt='Co-creatieve aanpak sessie'
-                            width={2688}
-                            height={1536}
-                            sizes='(max-width: 1024px) 100vw, 42vw'
-                            className='editorial-image editorial-image--wide'
-                        />
-                        <div className='max-w-3xl'>
+                    <div className='grid gap-8 sm:gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center'>
+                        <div className='process-orbit' aria-label='Vijf fasen van de co-creatieve aanpak'>
+                            <div className='process-orbit__core'>
+                                <span>Co-creatie</span>
+                                <strong>van vraag naar verandering</strong>
+                            </div>
+                            <div className='process-orbit__steps'>
+                                {processSteps.map((step, index) => (
+                                    <div key={step} className='process-orbit__step'>
+                                        <span>0{index + 1}</span>
+                                        <h3>{step}</h3>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        <div className='process-copy max-w-3xl'>
                             <p className='section-kicker text-[#FDF5E2]/80'>De co-creatieve aanpak</p>
-                            <h2 className='mt-3 text-3xl font-extrabold leading-tight sm:mt-4 sm:text-6xl'>
+                            <h2 className='mt-3 text-3xl font-extrabold leading-tight sm:mt-4 sm:text-5xl'>
                                 Van eerste vraag naar gedragen verandering.
                             </h2>
                             <p className='mt-4 text-base leading-7 text-[#FDF5E2]/90 sm:mt-6 sm:text-xl sm:leading-8'>
@@ -167,14 +172,6 @@ const HomePage: React.FC = () => {
                                 verandering hoort.
                             </p>
                         </div>
-                    </div>
-                    <div className='mt-8 grid grid-cols-2 gap-3 sm:mt-12 md:grid-cols-5'>
-                        {processSteps.map((step, index) => (
-                            <div key={step} className='border-t border-[#FDF5E2]/45 pt-3 sm:pt-5'>
-                                <span className='text-sm font-bold text-[#E88A32]'>0{index + 1}</span>
-                                <h3 className='mt-1 text-xl font-extrabold sm:mt-3 sm:text-2xl'>{step}</h3>
-                            </div>
-                        ))}
                     </div>
                 </div>
             </section>
@@ -335,7 +332,7 @@ const HomePage: React.FC = () => {
                             neemt contact met je op.
                         </p>
                         <div className='mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row'>
-                            <a className='brand-button' href='mailto:maartje.ibubos@gmail.com'>
+                            <a className='brand-button' href='mailto:maartje@ibubos.nl'>
                                 <Mail aria-hidden className='mr-2 h-5 w-5' />
                                 Mail Maartje
                             </a>
@@ -344,25 +341,15 @@ const HomePage: React.FC = () => {
                                 Bel direct
                             </a>
                         </div>
-                        <p className='mt-5 inline-flex items-center gap-2 text-sm font-bold text-[#FDF5E2]/85 sm:mt-6 sm:text-base'>
-                            <MapPin aria-hidden className='h-5 w-5 text-[#E88A32]' />
-                            Heesterveld 132A, Amsterdam
-                        </p>
                     </div>
-                    <div className='map-frame'>
-                        <a
-                            className='map-link-card'
-                            href='https://www.google.com/maps/search/?api=1&query=Heesterveld%20132A%2C%20Amsterdam'
-                            target='_blank'
-                            rel='noreferrer'>
-                            <MapPin aria-hidden className='h-6 w-6 text-[#E88A32]' />
-                            <span>Open Heesterveld 132A in Google Maps</span>
-                        </a>
-                        <iframe
-                            title='Kaart naar Ibu Bos'
-                            src='https://www.google.com/maps?q=Heesterveld%20132A%2C%20Amsterdam&output=embed'
-                            loading='lazy'
-                            referrerPolicy='no-referrer-when-downgrade'
+                    <div className='contact-media'>
+                        <Image
+                            src='/images/cocreatieveaanpak.webp'
+                            alt='Co-creatieve aanpak sessie'
+                            width={2688}
+                            height={1536}
+                            sizes='(max-width: 1024px) 100vw, 48vw'
+                            className='editorial-image editorial-image--wide'
                         />
                     </div>
                 </div>
@@ -380,8 +367,8 @@ const HomePage: React.FC = () => {
                     <div className='flex flex-wrap gap-x-5 gap-y-2'>
                         <a
                             className='text-[#E88A32] underline-offset-4 hover:underline'
-                            href='mailto:maartje.ibubos@gmail.com'>
-                            maartje.ibubos@gmail.com
+                            href='mailto:maartje@ibubos.nl'>
+                            maartje@ibubos.nl
                         </a>
                         <a
                             className='text-[#E88A32] underline-offset-4 hover:underline'

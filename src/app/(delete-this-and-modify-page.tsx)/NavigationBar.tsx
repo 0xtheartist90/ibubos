@@ -28,7 +28,7 @@ const NavigationBar = () => {
                         </a>
                     ))}
                 </nav>
-                <a className='brand-nav-cta' href='mailto:maartje.ibubos@gmail.com'>
+                <a className='brand-nav-cta' href='mailto:maartje@ibubos.nl'>
                     Contact
                 </a>
             </div>
