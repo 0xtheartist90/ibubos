@@ -9,6 +9,7 @@ import {
     projectInputSchema
 } from '../src/lib/content/validation.ts';
 import { orderPublished, rankRelated } from '../src/lib/content/ranking.ts';
+import { getUploadError } from '../src/lib/admin/upload.ts';
 
 const sections = [{ heading: 'Een heldere tussenkop', body: 'Dit is een geldige inhoudelijke paragraaf.' }];
 
@@ -126,4 +127,10 @@ test('accepts up to four content sections', () => {
         }).success,
         true
     );
+});
+
+test('validates admin image uploads', () => {
+    assert.equal(getUploadError({ type: 'image/webp', size: 1024 }), null);
+    assert.equal(getUploadError({ type: 'image/svg+xml', size: 1024 }), 'unsupported-type');
+    assert.equal(getUploadError({ type: 'image/jpeg', size: 5 * 1024 * 1024 + 1 }), 'too-large');
 });

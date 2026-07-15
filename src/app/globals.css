@@ -1509,6 +1509,39 @@
     overflow: hidden;
   }
 
+  .admin-image-upload {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .admin-image-upload input {
+    min-height: auto;
+    padding: 0.45rem;
+  }
+
+  .admin-image-upload button {
+    background: var(--ibu-green);
+    color: var(--ibu-cream);
+    cursor: pointer;
+    font-size: 0.78rem;
+    font-weight: 900;
+    padding: 0.75rem 1rem;
+    text-transform: uppercase;
+  }
+
+  .admin-image-upload button:disabled {
+    cursor: wait;
+    opacity: 0.6;
+  }
+
+  .admin-image-error {
+    color: #9b2c20;
+    font-weight: 700;
+    margin: 0;
+  }
+
   .admin-image-preview img {
     height: 100%;
     object-fit: cover;
