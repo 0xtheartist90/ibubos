@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import test from 'node:test';
 
 const relatedSource = readFileSync('src/components/content/RelatedContent.tsx', 'utf8');
-const homeSource = readFileSync('src/app/(delete-this-and-modify-page.tsx)/HomePage.tsx', 'utf8');
+const homeSource = readFileSync('src/app/(home)/HomePage.tsx', 'utf8');
 const projectsSource = readFileSync('src/app/projecten/page.tsx', 'utf8');
 const blogDetailSource = readFileSync('src/app/blogs/[slug]/page.tsx', 'utf8');
 const projectDetailSource = readFileSync('src/app/projecten/[slug]/page.tsx', 'utf8');
@@ -18,8 +18,31 @@ test('related content uses compact rows instead of archive cards', () => {
     assert.match(relatedSource, /related-row/);
 });
 
-test('allows the long project hero title to wrap at a natural breakpoint', () => {
-    assert.match(projectsSource, /Praktijk&shy;voorbeelden/);
+test('uses the featured project as the featured section title', () => {
+    assert.match(projectsSource, /<h2>\{featuredProject\.title\}<\/h2>/);
+});
+
+test('uses green behind the project archive cards', () => {
+    assert.match(projectsSource, /<section className='bg-\[#15583B\][^']*pt-12[^']*text-\[#FDF5E2\]/);
+    assert.match(projectsSource, /lg:grid-cols-2 xl:grid-cols-3/);
+});
+
+test('keeps archive hero eyebrows free of section numbers', () => {
+    assert.doesNotMatch(blogsSource, /<span>01<\/span>/);
+    assert.doesNotMatch(projectsSource, /<span>02<\/span>/);
+});
+
+test('paginates the project archive three items at a time', () => {
+    assert.match(projectsSource, /getPaginatedItems/);
+    assert.match(projectsSource, /getPaginatedItems\(projects, requestedPage, 3\)/);
+    assert.match(projectsSource, /href=\{pageNumber === 1 \? '\/projecten' : `\/projecten\?page=\$\{pageNumber\}`\}/);
+    assert.match(projectsSource, /scroll=\{false\}/);
+});
+
+test('keeps project card images and long titles visually consistent', () => {
+    assert.match(readFileSync('src/components/content/ProjectCard.tsx', 'utf8'), /project-card__image/);
+    assert.match(globalStyles, /\.project-card__image \{[\s\S]*?aspect-ratio: 3 \/ 2/);
+    assert.match(globalStyles, /\.project-card h2 \{[\s\S]*?overflow-wrap: anywhere/);
 });
 
 test('links resilient cities directly to the projects archive', () => {
@@ -43,6 +66,23 @@ test('features a real blog post in its own homepage section', () => {
     assert.match(homeSource, /\{featuredBlog\.title\}/);
     assert.match(homeSource, /href='\/blogs'/);
     assert.doesNotMatch(homeSource, /home-discovery/);
+});
+
+test('keeps the blog archive hero title and image on the same featured post', () => {
+    assert.match(readFileSync('src/app/blogs/page.tsx', 'utf8'), /<h2>\{featuredBlog\.title\}<\/h2>/);
+    assert.match(readFileSync('src/app/blogs/page.tsx', 'utf8'), /\{featuredBlog\.description\}/);
+    assert.match(readFileSync('src/app/blogs/page.tsx', 'utf8'), /src=\{featuredBlog\.image\}/);
+});
+
+test('keeps the project archive hero title and image on the same featured project', () => {
+    assert.match(projectsSource, /<h2>\{featuredProject\.title\}<\/h2>/);
+    assert.match(projectsSource, /\{featuredProject\.description\}/);
+    assert.match(projectsSource, /src=\{featuredProject\.image\}/);
+});
+
+test('keeps the current scroll position when changing blog pages', () => {
+    assert.match(readFileSync('src/app/blogs/page.tsx', 'utf8'), /href=\{pageNumber === 1 \? '\/blogs' : `\/blogs\?page=\$\{pageNumber\}`\}/);
+    assert.match(readFileSync('src/app/blogs/page.tsx', 'utf8'), /scroll=\{false\}/);
 });
 
 test('uses green for the featured blog and beige for contact', () => {

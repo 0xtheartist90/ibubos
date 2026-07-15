@@ -20,8 +20,10 @@ const AdminImageField = ({ defaultValue }: { defaultValue: string }) => {
 
         try {
             const response = await fetch('/api/admin/upload', { method: 'POST', body: formData });
-            const result = (await response.json()) as { url?: string; error?: string };
-            if (!response.ok || !result.url) throw new Error(result.error ?? 'Upload mislukt.');
+            const result = (await response.json().catch(() => ({}))) as { url?: string; error?: string };
+            if (!response.ok || !result.url) {
+                throw new Error(result.error ?? `Upload mislukt (status ${response.status}).`);
+            }
 
             setImage(result.url);
             setFailed(false);
@@ -48,11 +50,16 @@ const AdminImageField = ({ defaultValue }: { defaultValue: string }) => {
                 />
             </label>
             <div className='admin-image-upload'>
-                <input ref={fileInput} type='file' accept='image/jpeg,image/png,image/webp' />
-                <button type='button' onClick={uploadImage} disabled={uploading}>
-                    {uploading ? 'Uploaden...' : 'Afbeelding uploaden'}
-                </button>
+                <input
+                    ref={fileInput}
+                    type='file'
+                    accept='image/jpeg,image/png,image/webp'
+                    onChange={uploadImage}
+                    disabled={uploading}
+                />
+                {uploading ? <span className='admin-image-uploading'>Uploaden…</span> : null}
             </div>
+            <small className='admin-hint'>Kies een bestand en het wordt direct geüpload. JPG, PNG of WebP, max. 4,5 MB.</small>
             {uploadError ? <p className='admin-image-error'>{uploadError}</p> : null}
             <div className='admin-image-preview'>
                 {image && !failed ? (

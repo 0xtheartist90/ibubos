@@ -1,4 +1,4 @@
-import { and, asc, desc, eq, ne } from 'drizzle-orm';
+import { and, asc, desc, eq, isNotNull, lte, ne, sql } from 'drizzle-orm';
 
 import { blogPosts, projects, type BlogPost, type Project } from '../content.ts';
 import { getDb } from '../db/client.ts';
@@ -26,7 +26,8 @@ const seedBlogs = (): ContentRecord[] =>
         outcome: null,
         createdAt: seedDate(index),
         updatedAt: seedDate(index),
-        publishedAt: seedDate(index)
+        publishedAt: seedDate(index),
+        plannedAt: null
     }));
 
 const seedProjects = (): ContentRecord[] =>
@@ -39,7 +40,8 @@ const seedProjects = (): ContentRecord[] =>
         takeaway: null,
         createdAt: seedDate(index),
         updatedAt: seedDate(index),
-        publishedAt: seedDate(index)
+        publishedAt: seedDate(index),
+        plannedAt: null
     }));
 
 const toRecord = (entry: ContentEntry): ContentRecord => ({
@@ -208,6 +210,27 @@ export const deleteContent = async (id: string) => {
     const [entry] = await requireDb().delete(contentEntries).where(eq(contentEntries.id, id)).returning();
 
 return entry ? toRecord(entry) : undefined;
+};
+
+export const publishDueContent = async (dueBefore: Date) => {
+    const rows = await requireDb()
+        .update(contentEntries)
+        .set({
+            status: 'published',
+            // De geplande dag wordt de publicatiedatum, zodat de volgorde klopt.
+            publishedAt: sql`coalesce(${contentEntries.plannedAt}, now())`,
+            updatedAt: new Date()
+        })
+        .where(
+            and(
+                eq(contentEntries.status, 'draft'),
+                isNotNull(contentEntries.plannedAt),
+                lte(contentEntries.plannedAt, dueBefore)
+            )
+        )
+        .returning();
+
+    return rows.map(toRecord);
 };
 
 export const countImageReferences = async (image: string, excludedId: string) => {

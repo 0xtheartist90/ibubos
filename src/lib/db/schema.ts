@@ -26,7 +26,8 @@ export const contentEntries = pgTable(
         outcome: text('outcome'),
         createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
         updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
-        publishedAt: timestamp('published_at', { withTimezone: true })
+        publishedAt: timestamp('published_at', { withTimezone: true }),
+        plannedAt: timestamp('planned_at', { withTimezone: true })
     },
     (table) => [
         check('content_entries_type_check', sql`${table.type} in ('blog', 'project')`),

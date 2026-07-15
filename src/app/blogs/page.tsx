@@ -24,20 +24,36 @@ const BlogsPage = async ({ searchParams }: BlogsPageProps) => {
 
     return (
         <main className='archive-page font-brand text-[#15583B]'>
-            <section className='archive-hero archive-hero--blogs bg-[#FDF5E2] px-5 pb-12 pt-32 sm:px-8 sm:pb-16 sm:pt-36 lg:px-10'>
+            <section className='page-hero'>
+                <Image
+                    src='/images/blogshero.webp'
+                    alt=''
+                    fill
+                    priority
+                    sizes='100vw'
+                    className='page-hero__image object-cover'
+                />
+                <div className='hero-reveal page-hero__content mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10'>
+                    <p className='page-hero__kicker'>Ibu Bos</p>
+                    <h1>Blogs & inzichten</h1>
+                    <p className='page-hero__intro'>
+                        Verhalen en inzichten over co-creatie, veerkracht en inclusieve groei.
+                    </p>
+                </div>
+            </section>
+
+            <section className='archive-hero archive-hero--blogs bg-[#FDF5E2] px-5 py-12 sm:px-8 sm:py-16 lg:px-10'>
                 <div className='archive-hero__grid mx-auto max-w-7xl'>
                     <div className='archive-hero__copy'>
                         <div className='archive-hero__eyebrow'>
-                            <span>01</span>
-                            <p className='section-kicker'>Blogs & inzichten</p>
+                            <p className='section-kicker'>Uitgelicht</p>
                         </div>
-                        <h1>Inzichten over veerkrachtige verandering.</h1>
+                        <h2>{featuredBlog.title}</h2>
                         <p className='archive-hero__intro'>
-                            Hier verzamelt Ibu Bos observaties, lessen en perspectieven over co-creatie,
-                            zelforganisatie, inclusieve groei en het bouwen aan veerkrachtige steden.
+                            {featuredBlog.description}
                         </p>
                         <Link href={`/blogs/${featuredBlog.slug}`} className='archive-hero__link'>
-                            Lees het uitgelichte verhaal
+                            Lees het volledige verhaal
                             <ArrowUpRight aria-hidden />
                         </Link>
                     </div>
@@ -70,6 +86,7 @@ const BlogsPage = async ({ searchParams }: BlogsPageProps) => {
                         <Link
                             key={pageNumber}
                             href={pageNumber === 1 ? '/blogs' : `/blogs?page=${pageNumber}`}
+                            scroll={false}
                             aria-current={pageNumber === currentPage ? 'page' : undefined}
                         >
                             {pageNumber}

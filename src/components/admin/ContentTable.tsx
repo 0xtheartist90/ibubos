@@ -13,6 +13,7 @@ const ContentTable = ({ items, type }: { items: ContentRecord[]; type: ContentTy
                     <tr>
                         <th>Titel</th>
                         <th>Status</th>
+                        <th>Gepland</th>
                         <th>Bijgewerkt</th>
                         <th aria-label='Acties' />
                     </tr>
@@ -30,7 +31,9 @@ const ContentTable = ({ items, type }: { items: ContentRecord[]; type: ContentTy
                                         className='admin-table__thumbnail'
                                     />
                                     <div>
-                                        <strong>{item.title}</strong>
+                                        <Link href={`/admin/${base}/${item.id}`} className='admin-table__title'>
+                                            <strong>{item.title}</strong>
+                                        </Link>
                                         <span>/{item.slug}</span>
                                     </div>
                                 </div>
@@ -40,6 +43,11 @@ const ContentTable = ({ items, type }: { items: ContentRecord[]; type: ContentTy
                                     {item.status === 'published' ? 'Gepubliceerd' : 'Concept'}
                                 </span>
                             </td>
+                            <td>
+                                {item.plannedAt
+                                    ? item.plannedAt.toLocaleDateString('nl-NL', { day: 'numeric', month: 'short', year: 'numeric' })
+                                    : '—'}
+                            </td>
                             <td>{item.updatedAt.toLocaleDateString('nl-NL')}</td>
                             <td>
                                 <Link href={`/admin/${base}/${item.id}`}>Bewerken</Link>
@@ -48,7 +56,14 @@ const ContentTable = ({ items, type }: { items: ContentRecord[]; type: ContentTy
                     ))}
                 </tbody>
             </table>
-            {!items.length ? <p className='admin-empty'>Nog geen content gevonden.</p> : null}
+            {!items.length ? (
+                <div className='admin-empty'>
+                    <p>Nog geen content gevonden.</p>
+                    <Link className='brand-button' href={`/admin/${base}/new`}>
+                        {type === 'blog' ? 'Schrijf je eerste blog' : 'Maak je eerste project'}
+                    </Link>
+                </div>
+            ) : null}
         </div>
     );
 };

@@ -3,8 +3,12 @@
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
+import { del } from '@vercel/blob';
+
 import { requireAdmin } from './auth';
+import { isBlobImageUrl } from './upload';
 import {
+    countImageReferences,
     createContent,
     deleteContent,
     findContentBySlug,
@@ -33,12 +37,22 @@ const parseForm = (type: ContentType, formData: FormData) => {
         label: value(formData, 'label'),
         intro: value(formData, 'summary'),
         sections,
-        tags: [value(formData, 'label')]
+        tags: [value(formData, 'label')],
+        plannedAt: value(formData, 'plannedAt') || undefined
     };
 
     return type === 'blog'
         ? { ...common, takeaway: value(formData, 'takeaway') }
         : { ...common, facts: lines(value(formData, 'facts')), outcome: value(formData, 'outcome') };
+};
+
+const removeOrphanedImage = async (image: string | null | undefined, excludedId: string) => {
+    if (!image || !isBlobImageUrl(image)) return;
+    try {
+        if ((await countImageReferences(image, excludedId)) === 0) await del(image);
+    } catch {
+        // Opruimen van blobs mag opslaan of verwijderen nooit blokkeren.
+    }
 };
 
 const refreshType = (type: ContentType) => {
@@ -61,6 +75,7 @@ export const saveContentAction = async (type: ContentType, id: string | null, fo
 
     const item = id ? await updateContent(id, draft) : await createContent(draft);
     if (!item) throw new Error('De content kon niet worden opgeslagen.');
+    if (id && existing && existing.image !== item.image) await removeOrphanedImage(existing.image, id);
     refreshType(type);
     redirect(`/admin/${type === 'blog' ? 'blogs' : 'projecten'}/${item.id}?saved=1`);
 };
@@ -82,7 +97,8 @@ export const unpublishContentAction = async (type: ContentType, id: string) => {
 export const deleteContentAction = async (type: ContentType, id: string, formData: FormData) => {
     await requireAdmin();
     if (formData.get('confirm') !== 'yes') return;
-    await deleteContent(id);
+    const removed = await deleteContent(id);
+    await removeOrphanedImage(removed?.image, id);
     refreshType(type);
     redirect(`/admin/${type === 'blog' ? 'blogs' : 'projecten'}`);
 };

@@ -41,7 +41,8 @@ const commonSchema = z.object({
     label: z.string().trim().min(2).max(40),
     intro: z.string().trim().min(10).max(1200),
     sections: z.array(sectionSchema).min(1).max(4),
-    tags: z.array(tagSchema).min(1).max(6)
+    tags: z.array(tagSchema).min(1).max(6),
+    plannedAt: z.string().trim().regex(/^\d{4}-\d{2}-\d{2}$/).optional()
 });
 
 export const blogInputSchema = commonSchema.extend({
@@ -93,7 +94,8 @@ export const normalizeContentInput = (
         label: parsed.label,
         intro: parsed.intro,
         sections: parsed.sections,
-        tags: uniqueNormalized(parsed.tags)
+        tags: uniqueNormalized(parsed.tags),
+        plannedAt: parsed.plannedAt ? new Date(`${parsed.plannedAt}T12:00:00Z`) : null
     };
 
     if (type === 'blog') {

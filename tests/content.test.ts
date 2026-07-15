@@ -34,6 +34,15 @@ test('paginates blogs in three groups of three', () => {
     assert.notEqual(firstPage.items[0]?.slug, lastPage.items[0]?.slug);
 });
 
+test('paginates projects in two groups of three', () => {
+    const firstPage = getPaginatedItems(projects, 1, 3);
+    const lastPage = getPaginatedItems(projects, 2, 3);
+
+    assert.equal(firstPage.items.length, 3);
+    assert.equal(lastPage.items.length, 3);
+    assert.equal(firstPage.totalPages, 2);
+});
+
 test('normalizes invalid pagination values', () => {
     assert.equal(getPaginatedItems(blogPosts, 0, 3).currentPage, 1);
     assert.equal(getPaginatedItems(blogPosts, 99, 3).currentPage, 3);

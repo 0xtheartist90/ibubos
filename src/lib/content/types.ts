@@ -25,6 +25,7 @@ export type ContentRecord = {
     createdAt: Date;
     updatedAt: Date;
     publishedAt: Date | null;
+    plannedAt: Date | null;
 };
 
 export type ContentDraft = Omit<ContentRecord, 'id' | 'createdAt' | 'updatedAt' | 'publishedAt'> & {

@@ -252,7 +252,7 @@ export const blogPosts: BlogPost[] = [
         title: 'Zelforganisatie vraagt om heldere kaders',
         description:
             'Vrijheid en verantwoordelijkheid groeien wanneer een groep precies weet waar ruimte zit en wat gezamenlijk bewaakt wordt.',
-        image: '/images/Resilient%20cities.webp',
+        image: '/images/resilient-cities.webp',
         label: 'Organisatie',
         readTime: '6 min lezen',
         intro:
@@ -348,7 +348,7 @@ export const projects: Project[] = [
         title: 'Resilient cities',
         description:
             'Analyse, strategie en implementatie voor steden, wijken en communities die sterker willen samenwerken aan toekomstige uitdagingen.',
-        image: '/images/Resilient%20cities.webp',
+        image: '/images/resilient-cities.webp',
         label: 'Aanpak',
         intro:
             'Resilient cities hebben resilient mensen, organisaties en samenwerkingsverbanden nodig. Ibu Bos helpt om die veerkracht zichtbaar en werkbaar te maken.',

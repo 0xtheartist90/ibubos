@@ -28,11 +28,18 @@ yarn-error.log*
 # local env files
 .env*.local
 .env.vercel
+.env.vercel.*
 vercel.env
 
 # vercel
 .vercel
 
+# editor/agent
+.claude/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Lokaal geüploade beheerafbeeldingen
+/public/images/uploads

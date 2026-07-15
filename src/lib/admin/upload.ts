@@ -8,3 +8,13 @@ export const getUploadError = (file: { type: string; size: number }) => {
 
     return null;
 };
+
+export const isBlobImageUrl = (value: string) => {
+    try {
+        const url = new URL(value);
+
+        return url.protocol === 'https:' && url.hostname.endsWith('.public.blob.vercel-storage.com');
+    } catch {
+        return false;
+    }
+};

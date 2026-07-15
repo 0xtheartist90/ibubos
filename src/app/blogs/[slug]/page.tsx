@@ -37,7 +37,7 @@ const BlogDetailPage = async ({ params }: BlogDetailPageProps) => {
     return (
         <main className='detail-page font-brand text-[#15583B]'>
             <section className='detail-hero bg-[#FDF5E2] px-5 pb-12 pt-36 sm:px-8 sm:pb-20 lg:px-10'>
-                <div className='mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.82fr_1fr] lg:items-end'>
+                <div className='hero-reveal mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.82fr_1fr] lg:items-end'>
                     <div>
                         <p className='section-kicker'>{post.label}</p>
                         <h1 className='mt-4 text-4xl font-extrabold leading-tight sm:text-7xl'>{post.title}</h1>

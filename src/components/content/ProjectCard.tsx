@@ -15,7 +15,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => (
             width={2500}
             height={1667}
             sizes='(max-width: 1024px) 100vw, 44vw'
-            className='editorial-image'
+            className='project-card__image'
         />
         <div>
             <p className='section-kicker'>{project.label}</p>

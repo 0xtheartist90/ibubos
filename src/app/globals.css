@@ -329,6 +329,186 @@
     aspect-ratio: 16 / 10;
   }
 
+  .reveal-target {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Slow expo-out settle: opacity resolves ahead of the rise so elements
+     land softly instead of sliding in at full visibility. */
+  html.reveal-ready .reveal-target {
+    opacity: 0;
+    transform: translate3d(0, 1.75rem, 0);
+    transition:
+      opacity 850ms cubic-bezier(0.33, 1, 0.68, 1) var(--reveal-delay, 0ms),
+      transform 1100ms cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms);
+    will-change: opacity, transform;
+  }
+
+  html.reveal-ready .reveal-target.is-revealed {
+    opacity: 1;
+    transform: none;
+    will-change: auto;
+  }
+
+  /* Text groups: the container only fades; its children carry the motion,
+     cascading kicker → heading → copy on top of the group's batch delay. */
+  html.reveal-ready .reveal-stagger {
+    transform: none;
+    transition: opacity 550ms cubic-bezier(0.33, 1, 0.68, 1) var(--reveal-delay, 0ms);
+  }
+
+  html.reveal-ready .reveal-stagger > * {
+    opacity: 0;
+    transform: translate3d(0, 1.4rem, 0);
+    transition:
+      opacity 750ms cubic-bezier(0.33, 1, 0.68, 1),
+      transform 1050ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  html.reveal-ready .reveal-stagger.is-revealed > * {
+    opacity: 1;
+    transform: none;
+  }
+
+  html.reveal-ready .reveal-stagger > *:nth-child(1) {
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  html.reveal-ready .reveal-stagger > *:nth-child(2) {
+    transition-delay: calc(var(--reveal-delay, 0ms) + 110ms);
+  }
+
+  html.reveal-ready .reveal-stagger > *:nth-child(3) {
+    transition-delay: calc(var(--reveal-delay, 0ms) + 220ms);
+  }
+
+  html.reveal-ready .reveal-stagger > *:nth-child(4) {
+    transition-delay: calc(var(--reveal-delay, 0ms) + 330ms);
+  }
+
+  html.reveal-ready .reveal-stagger > *:nth-child(5) {
+    transition-delay: calc(var(--reveal-delay, 0ms) + 440ms);
+  }
+
+  html.reveal-ready .reveal-stagger > *:nth-child(n + 6) {
+    transition-delay: calc(var(--reveal-delay, 0ms) + 550ms);
+  }
+
+  /* Images settle from a slight zoom while their card fades in. The
+     standalone scale property composes with the transform-based hover zooms. */
+  html.reveal-ready .reveal-media img {
+    scale: 1.07;
+    transition: scale 1500ms cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms);
+  }
+
+  html.reveal-ready .reveal-media.is-revealed img {
+    scale: 1;
+  }
+
+  /* Unclipped editorial images open with a soft vertical wipe — a zoom would
+     spill past their border since these have no overflow-hidden wrapper. */
+  html.reveal-ready .reveal-wipe img,
+  html.reveal-ready img.reveal-wipe {
+    clip-path: inset(10% 0 10% 0);
+    transition: clip-path 1300ms cubic-bezier(0.16, 1, 0.3, 1) calc(var(--reveal-delay, 0ms) + 80ms);
+  }
+
+  html.reveal-ready .reveal-wipe.is-revealed img,
+  html.reveal-ready img.reveal-wipe.is-revealed {
+    clip-path: inset(0);
+  }
+
+  @keyframes ibu-hero-rise {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes ibu-hero-child-rise {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 2.2rem, 0);
+      filter: blur(6px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+      filter: blur(0);
+    }
+  }
+
+  html.reveal-ready .hero-reveal {
+    animation: ibu-hero-rise 700ms ease-out both;
+    opacity: 1;
+    transform: none;
+  }
+
+  html.reveal-ready .hero-reveal > *,
+  html.reveal-ready .hero-reveal > div > * {
+    animation: ibu-hero-child-rise 1100ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 80ms;
+  }
+
+  html.reveal-ready .hero-reveal > *:nth-child(2),
+  html.reveal-ready .hero-reveal > div > *:nth-child(2) {
+    animation-delay: 200ms;
+  }
+
+  html.reveal-ready .hero-reveal > *:nth-child(3),
+  html.reveal-ready .hero-reveal > div > *:nth-child(3) {
+    animation-delay: 320ms;
+  }
+
+  html.reveal-ready .hero-reveal > *:nth-child(4),
+  html.reveal-ready .hero-reveal > div > *:nth-child(4) {
+    animation-delay: 440ms;
+  }
+
+  html.reveal-ready .hero-reveal > *:nth-child(5),
+  html.reveal-ready .hero-reveal > div > *:nth-child(5) {
+    animation-delay: 560ms;
+  }
+
+  html.reveal-ready .hero-reveal > *:nth-child(n + 6),
+  html.reveal-ready .hero-reveal > div > *:nth-child(n + 6) {
+    animation-delay: 680ms;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html.reveal-ready .reveal-target,
+    html.reveal-ready .reveal-target.is-revealed {
+      opacity: 1;
+      transform: none;
+      transition: none;
+      animation: none;
+    }
+
+    html.reveal-ready .reveal-media img {
+      scale: 1;
+      transition: none;
+    }
+
+    html.reveal-ready .reveal-stagger > * {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+
+    html.reveal-ready .reveal-wipe img,
+    html.reveal-ready img.reveal-wipe {
+      clip-path: none;
+      transition: none;
+    }
+
+    html.reveal-ready .page-hero__image {
+      animation: none;
+    }
+  }
+
   .editorial-aside {
     display: grid;
     gap: 1.2rem;
@@ -629,12 +809,12 @@
     height: 100%;
     object-fit: cover;
     position: absolute;
-    transition: transform 500ms ease;
+    transition: transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
     width: 100%;
   }
 
   .featured-blog__media:hover img {
-    transform: scale(1.025);
+    transform: scale(1.045);
   }
 
   .featured-blog__media-label {
@@ -682,6 +862,77 @@
     min-height: 100vh;
   }
 
+  .full-bleed-media {
+    overflow: hidden;
+  }
+
+  .full-bleed-media__image {
+    display: block;
+    height: clamp(16rem, 52vh, 34rem);
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .page-hero {
+    align-items: flex-end;
+    display: flex;
+    min-height: clamp(26rem, 68vh, 42rem);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .page-hero::after {
+    background: linear-gradient(180deg, rgba(21, 88, 59, 0.32), rgba(21, 88, 59, 0.05) 42%, rgba(21, 88, 59, 0.88));
+    content: '';
+    inset: 0;
+    position: absolute;
+  }
+
+  @keyframes ibu-hero-media-settle {
+    from {
+      scale: 1.08;
+    }
+    to {
+      scale: 1;
+    }
+  }
+
+  html.reveal-ready .page-hero__image {
+    animation: ibu-hero-media-settle 2200ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .page-hero__content {
+    color: var(--ibu-cream);
+    padding-bottom: clamp(2.5rem, 6vw, 4.5rem);
+    position: relative;
+    z-index: 1;
+  }
+
+  .page-hero__kicker {
+    color: var(--ibu-orange);
+    font-size: 0.85rem;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .page-hero__content h1 {
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 900;
+    letter-spacing: -0.035em;
+    line-height: 0.93;
+    margin-top: 1rem;
+    max-width: 12ch;
+  }
+
+  .page-hero__intro {
+    color: rgba(253, 245, 226, 0.88);
+    font-size: clamp(1rem, 1.6vw, 1.25rem);
+    line-height: 1.6;
+    margin-top: 1.4rem;
+    max-width: 34rem;
+  }
+
   .archive-hero {
     background-image: linear-gradient(rgba(21, 88, 59, 0.055) 1px, transparent 1px);
     background-size: 100% 3.5rem;
@@ -715,7 +966,8 @@
     letter-spacing: 0.12em;
   }
 
-  .archive-hero__copy h1 {
+  .archive-hero__copy h1,
+  .archive-hero__copy h2 {
     font-size: clamp(2.75rem, 6vw, 5.6rem);
     font-weight: 900;
     letter-spacing: -0.035em;
@@ -768,12 +1020,12 @@
     aspect-ratio: 16 / 10;
     height: 100%;
     object-fit: cover;
-    transition: transform 500ms cubic-bezier(0.2, 0.7, 0.2, 1);
+    transition: transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
     width: 100%;
   }
 
   .archive-feature:hover .archive-feature__image {
-    transform: scale(1.025);
+    transform: scale(1.045);
   }
 
   .archive-feature__caption {
@@ -858,14 +1110,14 @@
     overflow: hidden;
     text-decoration: none;
     transition:
-      border-color 180ms ease,
-      transform 180ms ease;
+      border-color 320ms ease,
+      transform 480ms cubic-bezier(0.33, 1, 0.68, 1);
   }
 
   .blog-card:hover,
   .project-card:hover {
     border-color: rgba(232, 138, 50, 0.72);
-    transform: translateY(-0.2rem);
+    transform: translateY(-0.3rem);
   }
 
   .blog-card__image {
@@ -921,23 +1173,32 @@
     background: rgba(253, 245, 226, 0.6);
     display: grid;
     gap: 1.25rem;
+    overflow: hidden;
     padding-bottom: 1.35rem;
     text-decoration: none;
     transition:
-      border-color 180ms ease,
-      transform 180ms ease;
+      border-color 320ms ease,
+      transform 480ms cubic-bezier(0.33, 1, 0.68, 1);
   }
 
   .project-card > div {
     padding: 0 1.2rem;
   }
 
+  .project-card__image {
+    aspect-ratio: 3 / 2;
+    height: clamp(12rem, 24vw, 18rem);
+    object-fit: cover;
+    width: 100%;
+  }
+
   .project-card h2 {
     color: var(--ibu-green);
-    font-size: clamp(1.85rem, 3vw, 3rem);
+    font-size: clamp(1.55rem, 2.2vw, 2.35rem);
     font-weight: 900;
     line-height: 1.02;
     margin-top: 0.8rem;
+    overflow-wrap: anywhere;
   }
 
   .project-card p:not(.section-kicker) {
@@ -1376,6 +1637,21 @@
     cursor: pointer;
   }
 
+  .admin-header nav a {
+    border-bottom: 2px solid transparent;
+    padding-bottom: 0.2rem;
+    transition: border-color 180ms ease, color 180ms ease;
+  }
+
+  .admin-header nav a:hover {
+    color: var(--ibu-orange);
+  }
+
+  .admin-header nav a[aria-current='page'] {
+    border-bottom-color: var(--ibu-orange);
+    color: var(--ibu-orange);
+  }
+
   .admin-content {
     margin: 0 auto;
     max-width: 80rem;
@@ -1479,7 +1755,385 @@
 
   .admin-status--draft { color: #9c622d; }
   .admin-status--published { color: var(--ibu-green); }
-  .admin-empty { padding: 2rem; }
+
+  .admin-empty {
+    display: grid;
+    gap: 1.25rem;
+    justify-items: start;
+    padding: 2.5rem 2rem;
+  }
+
+  .admin-table__title {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .admin-table__title:hover strong {
+    color: var(--ibu-orange);
+  }
+
+  .admin-title-row__status {
+    align-items: center;
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.75rem;
+  }
+
+  .admin-title-row__status a {
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-decoration: underline;
+    text-underline-offset: 0.25rem;
+  }
+
+  .admin-calendar {
+    margin-top: 2.5rem;
+  }
+
+  .admin-calendar__header {
+    align-items: center;
+    display: flex;
+    gap: 1.5rem;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .admin-calendar__header h2 {
+    font-size: 1.35rem;
+    font-weight: 900;
+  }
+
+  .admin-calendar__nav {
+    align-items: center;
+    display: flex;
+    gap: 0.9rem;
+  }
+
+  .admin-calendar__nav strong {
+    font-size: 0.95rem;
+    font-weight: 900;
+    min-width: 9rem;
+    text-align: center;
+    text-transform: capitalize;
+  }
+
+  .admin-calendar__nav button {
+    align-items: center;
+    background: transparent;
+    border: 1px solid rgba(21, 88, 59, 0.28);
+    color: var(--ibu-green);
+    cursor: pointer;
+    display: inline-flex;
+    font-weight: 900;
+    height: 2.2rem;
+    justify-content: center;
+    transition: background-color 160ms ease, color 160ms ease;
+    width: 2.2rem;
+  }
+
+  .admin-calendar__nav button:hover {
+    background: var(--ibu-green);
+    color: var(--ibu-cream);
+  }
+
+  .admin-calendar__grid {
+    background: rgba(21, 88, 59, 0.13);
+    border: 1px solid rgba(21, 88, 59, 0.16);
+    display: grid;
+    gap: 1px;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+
+  .admin-calendar__weekday {
+    background: var(--ibu-green);
+    color: var(--ibu-cream);
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    padding: 0.5rem 0.6rem;
+    text-transform: uppercase;
+  }
+
+  .admin-calendar__day {
+    background: var(--ibu-cream);
+    display: grid;
+    align-content: start;
+    gap: 0.3rem;
+    min-height: 5.2rem;
+    padding: 0.45rem 0.5rem;
+  }
+
+  .admin-calendar__day--empty {
+    background: rgba(253, 245, 226, 0.55);
+  }
+
+  .admin-calendar__day--today {
+    box-shadow: inset 0 0 0 2px var(--ibu-orange);
+  }
+
+  .admin-calendar__date {
+    color: rgba(21, 88, 59, 0.65);
+    font-size: 0.78rem;
+    font-weight: 800;
+  }
+
+  .admin-calendar__item {
+    background: rgba(232, 138, 50, 0.16);
+    border-left: 3px solid var(--ibu-orange);
+    color: var(--ibu-green);
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 800;
+    overflow: hidden;
+    padding: 0.25rem 0.4rem;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .admin-calendar__item--published {
+    background: rgba(21, 88, 59, 0.12);
+    border-left-color: var(--ibu-green);
+  }
+
+  a.admin-calendar__item:hover {
+    background: var(--ibu-orange);
+    color: var(--ibu-cream);
+  }
+
+  .admin-calendar__legend {
+    align-items: center;
+    color: rgba(21, 88, 59, 0.65);
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 0.82rem;
+    gap: 0.7rem;
+    margin-top: 0.9rem;
+  }
+
+  .admin-calendar__legend .admin-calendar__item {
+    flex: 0 0 auto;
+  }
+
+  .admin-field--narrow {
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  .admin-field--narrow input {
+    justify-self: start;
+    min-width: 14rem;
+  }
+
+  .admin-field__label {
+    font-size: 0.85rem;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .admin-view-toggle {
+    display: inline-flex;
+    gap: 0;
+    margin-bottom: 1.25rem;
+  }
+
+  .admin-view-toggle button {
+    background: var(--ibu-cream);
+    border: 1px solid rgba(21, 88, 59, 0.28);
+    color: var(--ibu-green);
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    padding: 0.55rem 1.1rem;
+    text-transform: uppercase;
+    transition: background-color 160ms ease, color 160ms ease;
+  }
+
+  .admin-view-toggle button + button {
+    border-left: 0;
+  }
+
+  .admin-view-toggle button[aria-pressed='true'] {
+    background: var(--ibu-green);
+    color: var(--ibu-cream);
+  }
+
+  .admin-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  }
+
+  .admin-grid__card {
+    background: var(--ibu-cream);
+    border: 1px solid rgba(21, 88, 59, 0.16);
+    color: inherit;
+    display: grid;
+    overflow: hidden;
+    text-decoration: none;
+    transition: border-color 160ms ease, transform 220ms cubic-bezier(0.33, 1, 0.68, 1);
+  }
+
+  .admin-grid__card:hover {
+    border-color: rgba(232, 138, 50, 0.7);
+    transform: translateY(-0.2rem);
+  }
+
+  .admin-grid__image {
+    aspect-ratio: 16 / 10;
+    height: auto;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .admin-grid__body {
+    display: grid;
+    gap: 0.35rem;
+    padding: 0.9rem 1rem 1.1rem;
+  }
+
+  .admin-grid__body strong {
+    font-size: 1.05rem;
+    font-weight: 900;
+    line-height: 1.2;
+  }
+
+  .admin-grid__body .admin-status {
+    justify-self: start;
+    margin-bottom: 0.15rem;
+  }
+
+  .admin-grid__slug {
+    color: rgba(21, 88, 59, 0.55);
+    font-size: 0.8rem;
+  }
+
+  .admin-grid__meta {
+    color: rgba(21, 88, 59, 0.7);
+    font-size: 0.82rem;
+    font-weight: 700;
+    margin-top: 0.2rem;
+  }
+
+  .admin-date {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    position: relative;
+  }
+
+  .admin-date__trigger {
+    background: #fffdf7;
+    border: 1px solid rgba(21, 88, 59, 0.28);
+    color: var(--ibu-green);
+    cursor: pointer;
+    font-weight: 800;
+    min-height: 3rem;
+    min-width: 14rem;
+    padding: 0.75rem 0.9rem;
+    text-align: left;
+  }
+
+  .admin-date__clear {
+    color: #9b2c20;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-decoration: underline;
+    text-underline-offset: 0.2rem;
+  }
+
+  .admin-date__popover {
+    background: var(--ibu-cream);
+    border: 1px solid rgba(21, 88, 59, 0.28);
+    box-shadow: 0 1.5rem 3.5rem rgba(7, 45, 29, 0.22);
+    left: 0;
+    padding: 0.9rem;
+    position: absolute;
+    top: calc(100% + 0.4rem);
+    width: 19rem;
+    z-index: 20;
+  }
+
+  .admin-date__nav {
+    margin-bottom: 0.75rem;
+  }
+
+  .admin-date__grid {
+    display: grid;
+    gap: 0.15rem;
+    grid-template-columns: repeat(7, 1fr);
+  }
+
+  .admin-date__weekday {
+    color: rgba(21, 88, 59, 0.6);
+    font-size: 0.68rem;
+    font-weight: 900;
+    padding-bottom: 0.35rem;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .admin-date__day {
+    aspect-ratio: 1;
+    background: transparent;
+    border: 0;
+    color: var(--ibu-green);
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 800;
+    transition: background-color 140ms ease, color 140ms ease;
+  }
+
+  .admin-date__day:hover {
+    background: rgba(232, 138, 50, 0.18);
+  }
+
+  .admin-date__day--today {
+    box-shadow: inset 0 0 0 1px var(--ibu-orange);
+  }
+
+  .admin-date__day--selected {
+    background: var(--ibu-green);
+    color: var(--ibu-cream);
+  }
+
+  .admin-hint {
+    color: rgba(21, 88, 59, 0.62);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .admin-save-bar {
+    align-items: center;
+    background: var(--ibu-cream);
+    border-top: 1px solid rgba(21, 88, 59, 0.18);
+    bottom: 0;
+    display: flex;
+    gap: 1.5rem;
+    justify-content: space-between;
+    margin: 0.5rem calc(-1 * clamp(1rem, 4vw, 2.5rem)) calc(-1 * clamp(1rem, 4vw, 2.5rem));
+    padding: 1rem clamp(1rem, 4vw, 2.5rem);
+    position: sticky;
+    z-index: 5;
+  }
+
+  .admin-save-bar span {
+    color: rgba(21, 88, 59, 0.65);
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+
+  .admin-image-uploading {
+    color: rgba(21, 88, 59, 0.65);
+    font-size: 0.85rem;
+    font-weight: 800;
+  }
 
   .admin-success {
     background: rgba(21, 88, 59, 0.1);
@@ -1602,12 +2256,12 @@
 
   .admin-danger-zone {
     align-items: center;
-    border-top: 1px solid rgba(21, 88, 59, 0.18);
+    border: 1px solid rgba(155, 44, 32, 0.25);
     display: flex;
     gap: 1rem;
     justify-content: space-between;
     margin-top: 2rem;
-    padding-top: 1.5rem;
+    padding: 1.25rem 1.5rem;
   }
 
   .admin-delete {
@@ -1617,6 +2271,8 @@
   }
 
   @media (max-width: 720px) {
+    .admin-calendar__day { min-height: 3.6rem; padding: 0.3rem; }
+    .admin-calendar__item { font-size: 0.62rem; }
     .admin-header { align-items: flex-start; }
     .admin-header nav { align-items: flex-end; flex-direction: column; gap: 0.35rem; }
     .admin-stats { grid-template-columns: 1fr; }

@@ -26,6 +26,8 @@ const AdminSectionsField = ({ initialSections }: { initialSections: ContentSecti
                                 value={section.heading}
                                 onChange={(event) => updateSection(index, 'heading', event.target.value)}
                                 required
+                                minLength={2}
+                                maxLength={120}
                             />
                         </label>
                         {sections.length > 1 ? (
@@ -41,6 +43,8 @@ const AdminSectionsField = ({ initialSections }: { initialSections: ContentSecti
                             value={section.body}
                             onChange={(event) => updateSection(index, 'body', event.target.value)}
                             required
+                            minLength={10}
+                            maxLength={5000}
                         />
                     </label>
                 </div>
