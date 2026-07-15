@@ -15,7 +15,6 @@ import {
     UsersRound
 } from 'lucide-react';
 
-import ContactDetails from '@/components/content/ContactDetails';
 import { getFeaturedBlog } from '@/lib/content/repository';
 
 const processSteps = ['Verkennen', 'Verbinden', 'Formeren', 'Creeren', 'Verduurzamen'];
@@ -382,7 +381,6 @@ return (
                                 Bel direct
                             </a>
                         </div>
-                        <ContactDetails />
                     </div>
                     <div className='contact-media'>
                         <Image
