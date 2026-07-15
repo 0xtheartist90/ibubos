@@ -7,6 +7,7 @@ import { ThemeProvider } from 'next-themes';
 
 import NavigationBar from '@/app/(delete-this-and-modify-page.tsx)/NavigationBar';
 import '@/app/globals.css';
+import SiteFooter from '@/components/layout/SiteFooter';
 import { Toaster } from '@/registry/new-york-v4/ui/sonner';
 
 const geistSans = localFont({
@@ -41,6 +42,7 @@ const Layout = ({ children }: Readonly<{ children: ReactNode }>) => {
                 <ThemeProvider attribute='class'>
                     <NavigationBar />
                     {children}
+                    <SiteFooter />
                     <Toaster />
                 </ThemeProvider>
             </body>

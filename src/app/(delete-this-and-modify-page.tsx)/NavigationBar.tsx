@@ -1,17 +1,16 @@
 import Image from 'next/image';
 
 const navItems = [
-    { href: '#over', label: 'Over' },
-    { href: '#werkwijze', label: 'Werkwijze' },
-    { href: '#aanbod', label: 'Aanbod' },
-    { href: '#contact', label: 'Contact' }
+    { href: '/', label: 'Home' },
+    { href: '/projecten', label: 'Projecten' },
+    { href: '/blogs', label: 'Blogs' }
 ];
 
 const NavigationBar = () => {
     return (
         <header className='fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-8'>
             <div className='mx-auto flex max-w-7xl items-center justify-between gap-4 rounded-[8px] border border-[#FDF5E2]/35 bg-[#FDF5E2]/90 px-4 py-3 shadow-[0_18px_45px_rgba(21,88,59,0.14)] backdrop-blur-md'>
-                <a href='#home' aria-label='Ibu Bos home' className='shrink-0'>
+                <a href='/' aria-label='Ibu Bos home' className='shrink-0'>
                     <Image
                         src='/images/Logo%20Topnav.webp'
                         alt='Ibu Bos'

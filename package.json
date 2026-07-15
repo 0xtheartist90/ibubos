@@ -8,6 +8,7 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
+        "test": "node --test tests/*.test.ts",
         "lint": "next lint",
         "lint:fix": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
