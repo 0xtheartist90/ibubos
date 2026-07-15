@@ -5,7 +5,8 @@ import { requireAdmin } from '@/lib/admin/auth';
 
 const ProtectedAdminLayout = async ({ children }: { children: ReactNode }) => {
     await requireAdmin();
-    return <AdminShell>{children}</AdminShell>;
+
+return <AdminShell>{children}</AdminShell>;
 };
 
 export default ProtectedAdminLayout;

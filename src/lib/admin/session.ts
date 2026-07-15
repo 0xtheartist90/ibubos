@@ -10,7 +10,8 @@ const sign = (payload: string, secret: string) =>
 export const createSessionToken = (secret: string, now = new Date(), lifetimeSeconds = 60 * 60 * 12) => {
     assertSecret(secret);
     const payload = Buffer.from(JSON.stringify({ exp: now.getTime() + lifetimeSeconds * 1000 })).toString('base64url');
-    return `${payload}.${sign(payload, secret)}`;
+
+return `${payload}.${sign(payload, secret)}`;
 };
 
 export const verifySessionToken = (token: string, secret: string, now = new Date()) => {
@@ -24,7 +25,8 @@ export const verifySessionToken = (token: string, secret: string, now = new Date
         if (expected.length !== supplied.length || !timingSafeEqual(expected, supplied)) return false;
 
         const value = JSON.parse(Buffer.from(payload, 'base64url').toString('utf8')) as { exp?: number };
-        return typeof value.exp === 'number' && value.exp > now.getTime();
+
+return typeof value.exp === 'number' && value.exp > now.getTime();
     } catch {
         return false;
     }

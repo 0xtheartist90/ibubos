@@ -17,7 +17,8 @@ export const imageSchema = z.string().trim().refine(
 
         try {
             const url = new URL(value);
-            return url.protocol === 'https:' && url.hostname.endsWith('.public.blob.vercel-storage.com');
+
+return url.protocol === 'https:' && url.hostname.endsWith('.public.blob.vercel-storage.com');
         } catch {
             return false;
         }
@@ -97,11 +98,13 @@ export const normalizeContentInput = (
 
     if (type === 'blog') {
         const blog = blogInputSchema.parse(parsed);
-        return { ...common, readTime: null, takeaway: blog.takeaway, facts: null, outcome: null };
+
+return { ...common, readTime: null, takeaway: blog.takeaway, facts: null, outcome: null };
     }
 
     const project = projectInputSchema.parse(parsed);
-    return {
+
+return {
         ...common,
         readTime: null,
         takeaway: null,

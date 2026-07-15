@@ -30,7 +30,8 @@ const AdminDashboard = async () => {
         );
     } catch (error) {
         if (!(error instanceof ContentSetupError)) throw error;
-        return <div className='admin-notice'><h1>Database koppelen</h1><p>{error.message}</p></div>;
+
+return <div className='admin-notice'><h1>Database koppelen</h1><p>{error.message}</p></div>;
     }
 };
 

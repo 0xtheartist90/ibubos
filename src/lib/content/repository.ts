@@ -78,13 +78,17 @@ const listPublishedRecords = async (type: ContentType): Promise<ContentRecord[]>
     const db = getDb();
     if (!db) return type === 'blog' ? seedBlogs() : seedProjects();
 
-    const rows = await db
-        .select()
-        .from(contentEntries)
-        .where(and(eq(contentEntries.type, type), eq(contentEntries.status, 'published')))
-        .orderBy(desc(contentEntries.publishedAt), asc(contentEntries.slug));
+    try {
+        const rows = await db
+            .select()
+            .from(contentEntries)
+            .where(and(eq(contentEntries.type, type), eq(contentEntries.status, 'published')))
+            .orderBy(desc(contentEntries.publishedAt), asc(contentEntries.slug));
 
-    return rows.map(toRecord);
+        return rows.map(toRecord);
+    } catch {
+        return type === 'blog' ? seedBlogs() : seedProjects();
+    }
 };
 
 export const listPublishedBlogs = async () => (await listPublishedRecords('blog')).map(toBlog);
@@ -92,40 +96,47 @@ export const listPublishedProjects = async () => (await listPublishedRecords('pr
 
 export const getPublishedBlog = async (slug: string) => {
     const record = (await listPublishedRecords('blog')).find((item) => item.slug === slug);
-    return record ? toBlog(record) : undefined;
+
+return record ? toBlog(record) : undefined;
 };
 
 export const getPublishedProject = async (slug: string) => {
     const record = (await listPublishedRecords('project')).find((item) => item.slug === slug);
-    return record ? toProject(record) : undefined;
+
+return record ? toProject(record) : undefined;
 };
 
 export const getFeaturedBlog = async () => {
     const post = (await listPublishedBlogs())[0];
     if (!post) throw new Error('Er is nog geen gepubliceerde blog.');
-    return post;
+
+return post;
 };
 
 export const getFeaturedProject = async () => {
     const project = (await listPublishedProjects())[0];
     if (!project) throw new Error('Er is nog geen gepubliceerd project.');
-    return project;
+
+return project;
 };
 
 export const getRelatedPublishedBlogs = async (slug: string, tags: string[], limit = 3) => {
     const records = rankRelated(await listPublishedRecords('blog'), tags, slug, limit);
-    return records.map(toBlog);
+
+return records.map(toBlog);
 };
 
 export const getRelatedPublishedProjects = async (slug: string, tags: string[], limit = 2) => {
     const records = rankRelated(await listPublishedRecords('project'), tags, slug, limit);
-    return records.map(toProject);
+
+return records.map(toProject);
 };
 
 const requireDb = () => {
     const db = getDb();
     if (!db) throw new ContentSetupError();
-    return db;
+
+return db;
 };
 
 export const listAdminContent = async (type?: ContentType) => {
@@ -137,12 +148,14 @@ export const listAdminContent = async (type?: ContentType) => {
               .where(eq(contentEntries.type, type))
               .orderBy(desc(contentEntries.updatedAt))
         : await db.select().from(contentEntries).orderBy(desc(contentEntries.updatedAt));
-    return rows.map(toRecord);
+
+return rows.map(toRecord);
 };
 
 export const getAdminContent = async (id: string) => {
     const [entry] = await requireDb().select().from(contentEntries).where(eq(contentEntries.id, id)).limit(1);
-    return entry ? toRecord(entry) : undefined;
+
+return entry ? toRecord(entry) : undefined;
 };
 
 export const findContentBySlug = async (type: ContentType, slug: string, excludedId?: string) => {
@@ -154,13 +167,15 @@ export const findContentBySlug = async (type: ContentType, slug: string, exclude
         .from(contentEntries)
         .where(and(...conditions))
         .limit(1);
-    return entry;
+
+return entry;
 };
 
 export const createContent = async (draft: ContentDraft) => {
     const values: NewContentEntry = { ...draft, publishedAt: null };
     const [entry] = await requireDb().insert(contentEntries).values(values).returning();
-    return toRecord(entry);
+
+return toRecord(entry);
 };
 
 export const updateContent = async (id: string, draft: ContentDraft) => {
@@ -169,7 +184,8 @@ export const updateContent = async (id: string, draft: ContentDraft) => {
         .set({ ...draft, updatedAt: new Date() })
         .where(eq(contentEntries.id, id))
         .returning();
-    return entry ? toRecord(entry) : undefined;
+
+return entry ? toRecord(entry) : undefined;
 };
 
 export const setContentStatus = async (id: string, status: ContentStatus) => {
@@ -184,12 +200,14 @@ export const setContentStatus = async (id: string, status: ContentStatus) => {
         })
         .where(eq(contentEntries.id, id))
         .returning();
-    return entry ? toRecord(entry) : undefined;
+
+return entry ? toRecord(entry) : undefined;
 };
 
 export const deleteContent = async (id: string) => {
     const [entry] = await requireDb().delete(contentEntries).where(eq(contentEntries.id, id)).returning();
-    return entry ? toRecord(entry) : undefined;
+
+return entry ? toRecord(entry) : undefined;
 };
 
 export const countImageReferences = async (image: string, excludedId: string) => {
@@ -197,5 +215,6 @@ export const countImageReferences = async (image: string, excludedId: string) =>
         .select({ id: contentEntries.id })
         .from(contentEntries)
         .where(and(eq(contentEntries.image, image), ne(contentEntries.id, excludedId)));
-    return rows.length;
+
+return rows.length;
 };

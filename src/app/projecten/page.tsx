@@ -13,7 +13,8 @@ export const metadata: Metadata = {
 
 const ProjectenPage = async () => {
     const [featuredProject, projects] = await Promise.all([getFeaturedProject(), listPublishedProjects()]);
-    return (
+
+return (
         <main className='archive-page font-brand text-[#15583B]'>
             <section className='archive-hero archive-hero--projects bg-[#FDF5E2] px-5 pb-12 pt-32 sm:px-8 sm:pb-16 sm:pt-36 lg:px-10'>
                 <div className='archive-hero__grid archive-hero__grid--reverse mx-auto max-w-7xl'>

@@ -16,13 +16,15 @@ export const isAdminConfigured = () =>
 export const authenticateAdmin = (username: string, password: string) => {
     const expectedUsername = process.env.ADMIN_USERNAME?.trim() ?? '';
     const passwordHash = process.env.ADMIN_PASSWORD_HASH?.trim() ?? '';
-    return isAdminConfigured() && verifyCredentials(username, password, expectedUsername, passwordHash);
+
+return isAdminConfigured() && verifyCredentials(username, password, expectedUsername, passwordHash);
 };
 
 export const hasAdminSession = async () => {
     const token = (await cookies()).get(ADMIN_COOKIE)?.value;
     const secret = process.env.AUTH_SECRET?.trim();
-    return Boolean(token && secret && verifySessionToken(token, secret));
+
+return Boolean(token && secret && verifySessionToken(token, secret));
 };
 
 export const requireAdmin = async () => {

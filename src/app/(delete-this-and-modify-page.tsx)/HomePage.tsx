@@ -61,7 +61,8 @@ const resilienceThemes = [
 
 const HomePage = async () => {
     const featuredBlog = await getFeaturedBlog();
-    return (
+
+return (
         <main className='font-brand text-brand-green'>
             <section id='home' className='relative min-h-screen overflow-hidden bg-[#FDF5E2]'>
                 <video
