@@ -20,7 +20,6 @@ const BlogCard = ({ post }: BlogCardProps) => (
         <div className='blog-card__body'>
             <div className='blog-card__meta'>
                 <span>{post.label}</span>
-                <span>{post.readTime}</span>
             </div>
             <h2>{post.title}</h2>
             <p>{post.description}</p>

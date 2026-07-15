@@ -4,17 +4,15 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 
 import { RelatedBlogs } from '@/components/content/RelatedContent';
-import { blogPosts, getBlogDetailRelated, getBlogPost } from '@/lib/content';
+import { getPublishedBlog, getRelatedPublishedBlogs } from '@/lib/content/repository';
 
 type BlogDetailPageProps = {
     params: Promise<{ slug: string }>;
 };
 
-export const generateStaticParams = () => blogPosts.map((post) => ({ slug: post.slug }));
-
 export const generateMetadata = async ({ params }: BlogDetailPageProps): Promise<Metadata> => {
     const { slug } = await params;
-    const post = getBlogPost(slug);
+    const post = await getPublishedBlog(slug);
 
     if (!post) {
         return {};
@@ -28,13 +26,13 @@ export const generateMetadata = async ({ params }: BlogDetailPageProps): Promise
 
 const BlogDetailPage = async ({ params }: BlogDetailPageProps) => {
     const { slug } = await params;
-    const post = getBlogPost(slug);
+    const post = await getPublishedBlog(slug);
 
     if (!post) {
         notFound();
     }
 
-    const related = getBlogDetailRelated(post);
+    const related = await getRelatedPublishedBlogs(post.slug, post.tags, 3);
 
     return (
         <main className='detail-page font-brand text-[#15583B]'>
@@ -67,7 +65,6 @@ const BlogDetailPage = async ({ params }: BlogDetailPageProps) => {
                     <article className='detail-article'>
                         <div className='detail-meta'>
                             <span>{post.label}</span>
-                            <span>{post.readTime}</span>
                         </div>
                         {post.sections.map((section) => (
                             <section key={section.heading}>
@@ -81,7 +78,7 @@ const BlogDetailPage = async ({ params }: BlogDetailPageProps) => {
                         </aside>
                     </article>
                     <aside className='detail-sidebar'>
-                        <RelatedBlogs blogs={related.items} />
+                        <RelatedBlogs blogs={related} />
                     </aside>
                 </div>
             </section>

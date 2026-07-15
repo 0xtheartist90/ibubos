@@ -4,14 +4,15 @@ import { ArrowUpRight } from 'lucide-react';
 import type { Metadata } from 'next';
 
 import ProjectCard from '@/components/content/ProjectCard';
-import { featuredProject, projects } from '@/lib/content';
+import { getFeaturedProject, listPublishedProjects } from '@/lib/content/repository';
 
 export const metadata: Metadata = {
     title: 'Projecten | Ibu Bos',
     description: 'Projecten en praktijkvoorbeelden van Ibu Bos rond co-creatie, veerkracht en lokale waarde.'
 };
 
-const ProjectenPage = () => {
+const ProjectenPage = async () => {
+    const [featuredProject, projects] = await Promise.all([getFeaturedProject(), listPublishedProjects()]);
     return (
         <main className='archive-page font-brand text-[#15583B]'>
             <section className='archive-hero archive-hero--projects bg-[#FDF5E2] px-5 pb-12 pt-32 sm:px-8 sm:pb-16 sm:pt-36 lg:px-10'>

@@ -1,6 +1,7 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import {
-    Camera,
+    ArrowUpRight,
     Compass,
     Handshake,
     Leaf,
@@ -13,6 +14,8 @@ import {
     Target,
     UsersRound
 } from 'lucide-react';
+
+import { getFeaturedBlog } from '@/lib/content/repository';
 
 const processSteps = ['Verkennen', 'Verbinden', 'Formeren', 'Creeren', 'Verduurzamen'];
 
@@ -56,25 +59,8 @@ const resilienceThemes = [
     { icon: Map, text: 'Veerkrachtanalyse en implementatie' }
 ];
 
-const PhotoPlaceholder = ({
-    label,
-    eyebrow = 'Beeldruimte',
-    className = ''
-}: {
-    label: string;
-    eyebrow?: string;
-    className?: string;
-}) => (
-    <div className={`photo-placeholder ${className}`}>
-        <div className='photo-placeholder__label'>
-            <Camera aria-hidden className='h-5 w-5' />
-            <span>{eyebrow}</span>
-        </div>
-        <span className='photo-placeholder__title'>{label}</span>
-    </div>
-);
-
-const HomePage: React.FC = () => {
+const HomePage = async () => {
+    const featuredBlog = await getFeaturedBlog();
     return (
         <main className='font-brand text-brand-green'>
             <section id='home' className='relative min-h-screen overflow-hidden bg-[#FDF5E2]'>
@@ -274,6 +260,10 @@ const HomePage: React.FC = () => {
                                 );
                             })}
                         </div>
+                        <Link href='/projecten' className='brand-button mt-7 sm:mt-9'>
+                            Bekijk onze projecten
+                            <ArrowUpRight aria-hidden className='ml-2 h-5 w-5' />
+                        </Link>
                     </div>
                 </div>
             </section>
@@ -314,14 +304,47 @@ const HomePage: React.FC = () => {
                 </div>
             </section>
 
-            <section id='contact' className='texture-section px-5 py-12 text-[#FDF5E2] sm:px-8 sm:py-16 lg:px-10'>
+            <section id='uitgelichte-blog' className='featured-blog texture-section px-5 py-12 text-[#FDF5E2] sm:px-8 sm:py-20 lg:px-10'>
+                <div className='featured-blog__layout mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-center'>
+                    <div className='featured-blog__copy'>
+                        <div className='featured-blog__meta'>
+                            <span>{featuredBlog.label}</span>
+                        </div>
+                        <p className='section-kicker'>Uitgelichte blog</p>
+                        <h2>{featuredBlog.title}</h2>
+                        <p className='featured-blog__description'>{featuredBlog.description}</p>
+                        <div className='featured-blog__actions'>
+                            <Link href={`/blogs/${featuredBlog.slug}`} className='brand-button'>
+                                Lees het artikel
+                                <ArrowUpRight aria-hidden className='ml-2 h-5 w-5' />
+                            </Link>
+                            <Link href='/blogs' className='featured-blog__archive-link'>
+                                Bekijk alle blogs
+                            </Link>
+                        </div>
+                    </div>
+                    <Link href={`/blogs/${featuredBlog.slug}`} className='featured-blog__media'>
+                        <Image
+                            src={featuredBlog.image}
+                            alt={featuredBlog.title}
+                            width={2500}
+                            height={1667}
+                            sizes='(max-width: 1024px) 100vw, 55vw'
+                        />
+                        <span className='featured-blog__media-label'>Lees verder</span>
+                        <ArrowUpRight aria-hidden />
+                    </Link>
+                </div>
+            </section>
+
+            <section id='contact' className='contact-section bg-[#FDF5E2] px-5 py-12 text-[#15583B] sm:px-8 sm:py-16 lg:px-10'>
                 <div className='mx-auto grid max-w-7xl gap-8 sm:gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center'>
                     <div>
-                        <p className='section-kicker text-[#FDF5E2]/80'>Contact</p>
+                        <p className='section-kicker'>Contact</p>
                         <h2 className='mt-3 text-3xl font-extrabold leading-tight sm:text-6xl'>
                             Zullen we samen kijken wat er nodig is?
                         </h2>
-                        <p className='mt-4 max-w-xl text-base leading-7 text-[#FDF5E2]/90 sm:mt-5 sm:text-xl sm:leading-8'>
+                        <p className='mt-4 max-w-xl text-base leading-7 sm:mt-5 sm:text-xl sm:leading-8'>
                             Wil je sparren over een samenwerking, training of vraagstuk? Stuur een bericht en Maartje
                             neemt contact met je op.
                         </p>
@@ -330,7 +353,7 @@ const HomePage: React.FC = () => {
                                 <Mail aria-hidden className='mr-2 h-5 w-5' />
                                 Mail Maartje
                             </a>
-                            <a className='brand-button brand-button--ghost' href='tel:+31619039645'>
+                            <a className='brand-button brand-button--outline' href='tel:+31619039645'>
                                 <Phone aria-hidden className='mr-2 h-5 w-5' />
                                 Bel direct
                             </a>

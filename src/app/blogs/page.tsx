@@ -4,7 +4,8 @@ import { ArrowUpRight } from 'lucide-react';
 import type { Metadata } from 'next';
 
 import BlogCard from '@/components/content/BlogCard';
-import { blogPosts, featuredBlog, getPaginatedItems } from '@/lib/content';
+import { getPaginatedItems } from '@/lib/content';
+import { getFeaturedBlog, listPublishedBlogs } from '@/lib/content/repository';
 
 export const metadata: Metadata = {
     title: 'Blogs | Ibu Bos',
@@ -17,6 +18,7 @@ type BlogsPageProps = {
 
 const BlogsPage = async ({ searchParams }: BlogsPageProps) => {
     const { page } = await searchParams;
+    const [blogPosts, featuredBlog] = await Promise.all([listPublishedBlogs(), getFeaturedBlog()]);
     const requestedPage = Number.parseInt(page ?? '1', 10);
     const { items, currentPage, totalPages } = getPaginatedItems(blogPosts, requestedPage, 3);
 
@@ -52,7 +54,6 @@ const BlogsPage = async ({ searchParams }: BlogsPageProps) => {
                         <span className='archive-feature__caption'>
                             <span>{featuredBlog.label}</span>
                             <strong>{featuredBlog.title}</strong>
-                            <em>{featuredBlog.readTime}</em>
                         </span>
                     </Link>
                 </div>

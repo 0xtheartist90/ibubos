@@ -4,17 +4,15 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 
 import { RelatedProjects } from '@/components/content/RelatedContent';
-import { getProject, getProjectDetailRelated, projects } from '@/lib/content';
+import { getPublishedProject, getRelatedPublishedProjects } from '@/lib/content/repository';
 
 type ProjectDetailPageProps = {
     params: Promise<{ slug: string }>;
 };
 
-export const generateStaticParams = () => projects.map((project) => ({ slug: project.slug }));
-
 export const generateMetadata = async ({ params }: ProjectDetailPageProps): Promise<Metadata> => {
     const { slug } = await params;
-    const project = getProject(slug);
+    const project = await getPublishedProject(slug);
 
     if (!project) {
         return {};
@@ -28,13 +26,13 @@ export const generateMetadata = async ({ params }: ProjectDetailPageProps): Prom
 
 const ProjectDetailPage = async ({ params }: ProjectDetailPageProps) => {
     const { slug } = await params;
-    const project = getProject(slug);
+    const project = await getPublishedProject(slug);
 
     if (!project) {
         notFound();
     }
 
-    const related = getProjectDetailRelated(project);
+    const related = await getRelatedPublishedProjects(project.slug, project.tags, 2);
 
     return (
         <main className='detail-page font-brand text-[#15583B]'>
@@ -85,7 +83,7 @@ const ProjectDetailPage = async ({ params }: ProjectDetailPageProps) => {
                         </Link>
                     </article>
                     <aside className='detail-sidebar'>
-                        <RelatedProjects projects={related.items} />
+                        <RelatedProjects projects={related} />
                     </aside>
                 </div>
             </section>

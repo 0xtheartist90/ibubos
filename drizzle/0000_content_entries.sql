@@ -1,0 +1,23 @@
+CREATE TABLE "content_entries" (
+    "id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+    "type" text NOT NULL,
+    "status" text DEFAULT 'draft' NOT NULL,
+    "slug" text NOT NULL,
+    "title" text NOT NULL,
+    "description" text NOT NULL,
+    "image" text NOT NULL,
+    "label" text NOT NULL,
+    "intro" text NOT NULL,
+    "sections" jsonb NOT NULL,
+    "tags" text[] NOT NULL,
+    "read_time" text,
+    "takeaway" text,
+    "facts" text[],
+    "outcome" text,
+    "created_at" timestamp with time zone DEFAULT now() NOT NULL,
+    "updated_at" timestamp with time zone DEFAULT now() NOT NULL,
+    "published_at" timestamp with time zone,
+    CONSTRAINT "content_entries_type_check" CHECK ("type" IN ('blog', 'project')),
+    CONSTRAINT "content_entries_status_check" CHECK ("status" IN ('draft', 'published')),
+    CONSTRAINT "content_entries_type_slug_unique" UNIQUE ("type", "slug")
+);
