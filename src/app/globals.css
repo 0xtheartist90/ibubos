@@ -335,8 +335,9 @@
   }
 
   /* Slow expo-out settle: opacity resolves ahead of the rise so elements
-     land softly instead of sliding in at full visibility. */
-  html.reveal-ready .reveal-target {
+     land softly instead of sliding in at full visibility. The hero is
+     excluded — it runs its own load animation and must never depend on JS. */
+  html.reveal-ready .reveal-target:not(.hero-reveal) {
     opacity: 0;
     transform: translate3d(0, 1.75rem, 0);
     transition:
