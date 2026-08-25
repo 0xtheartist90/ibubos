@@ -47,13 +47,10 @@ test('keeps project card images and long titles visually consistent', () => {
 
 test('links resilient cities directly to the projects archive', () => {
     const resilientStart = homeSource.indexOf("id='resilient-cities'");
-    const recentProjectStart = homeSource.indexOf("id='projecten'");
     const projectsLink = homeSource.indexOf("href='/projecten'", resilientStart);
 
     assert.ok(resilientStart !== -1);
-    assert.ok(recentProjectStart !== -1);
     assert.ok(projectsLink > resilientStart);
-    assert.ok(projectsLink < recentProjectStart);
     assert.match(homeSource, /Bekijk onze projecten/);
 });
 

@@ -10,6 +10,7 @@ import { Analytics } from '@/components/analytics';
 import NavigationBar from '@/components/layout/NavigationBar';
 import SiteFooter from '@/components/layout/SiteFooter';
 import RevealObserver from '@/components/RevealObserver';
+import SmoothScroll from '@/components/SmoothScroll';
 
 const geistSans = localFont({
     src: './fonts/GeistVF.woff',
@@ -50,6 +51,7 @@ const Layout = ({ children }: Readonly<{ children: ReactNode }>) => {
             <body
                 className={`${geistSans.variable} ${geistMono.variable} bg-background text-foreground overscroll-none antialiased`}>
                 <ThemeProvider attribute='class'>
+                    <SmoothScroll />
                     <RevealObserver />
                     <NavigationBar />
                     {children}

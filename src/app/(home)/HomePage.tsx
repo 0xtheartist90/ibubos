@@ -7,7 +7,6 @@ import {
     Leaf,
     Mail,
     Map,
-    Mic2,
     Phone,
     Sparkles,
     Sprout,
@@ -31,19 +30,24 @@ const marqueeImages = [
 
 const services = [
     {
-        icon: Compass,
-        title: 'Programma ontwikkeling',
-        text: 'Van vraagstuk naar gedragen richting, met ruimte voor complexiteit.'
-    },
-    {
-        icon: UsersRound,
-        title: 'Co-creatie en facilitering',
-        text: 'Sessies waarin groepen elkaar vinden en scherpe keuzes kunnen maken.'
+        icon: Map,
+        title: 'Integrale gebiedsontwikkeling',
+        text: 'Masterplan Zuidoost · Arenapoort · G-Buurt Moving Forward'
     },
     {
         icon: Leaf,
-        title: 'Veerkrachtstrategie',
-        text: 'Analyse, prioriteiten en concrete stappen voor duurzame inbedding.'
+        title: 'Energie & duurzaamheids-transities',
+        text: 'Gebiedsgericht SLIM · Energie van Utrecht · Donut Economie'
+    },
+    {
+        icon: UsersRound,
+        title: 'Sociale innovatie, participatie & democratisering',
+        text: 'Living Labs · buurtplatformen · fieldlabs · participatieverordening'
+    },
+    {
+        icon: Compass,
+        title: 'Circulaire economie & lokaal ondernemen',
+        text: '2PING (lokale munt) · Donut Deals · Meer Ondernemen'
     }
 ];
 
@@ -72,43 +76,45 @@ return (
                     muted
                     playsInline
                     aria-label='Ibu Bos hero video'>
-                    <source src='/images/Hero3.webm' type='video/webm' />
+                    <source src='/images/homehero.webm' type='video/webm' />
                 </video>
                 <div className='absolute inset-0 bg-[#E88A32]/18' />
-                <div className='hero-reveal relative mx-auto flex min-h-screen w-full max-w-7xl flex-col items-center justify-center px-5 pb-8 pt-28 text-center sm:px-8 lg:px-10'>
-                    <div className='flex max-w-4xl flex-col items-center text-[#FDF5E2] drop-shadow-[0_2px_18px_rgba(0,0,0,0.28)]'>
-                        <Image
-                            src='/images/Logo.webp'
-                            alt='Ibu Bos logo'
-                            width={540}
-                            height={540}
-                            priority
-                            className='mb-5 h-64 w-64 sm:h-80 sm:w-80 lg:h-[27rem] lg:w-[27rem]'
-                        />
-                        <p className='max-w-2xl text-xl font-bold leading-8 text-[#FDF5E2] sm:text-2xl'>
-                            Voor duurzame ontwikkeling, zelforganisatie en inclusieve groei. Samen bouwen we aan
-                            veerkrachtige steden voor de 21e eeuw.
-                        </p>
-                    </div>
+                <div className='hero-reveal relative mx-auto flex min-h-screen w-full max-w-7xl flex-col items-center justify-between px-5 pb-16 pt-28 text-center sm:px-8 sm:pb-20 sm:pt-32 lg:px-10 lg:pb-24'>
+                    <Image
+                        src='/images/Logo.webp'
+                        alt='Ibu Bos logo'
+                        width={540}
+                        height={540}
+                        priority
+                        className='h-56 w-56 drop-shadow-[0_2px_18px_rgba(0,0,0,0.28)] sm:h-64 sm:w-64 lg:h-72 lg:w-72'
+                    />
+                    <p className='max-w-2xl text-xl font-bold leading-8 text-[#FDF5E2] drop-shadow-[0_2px_18px_rgba(0,0,0,0.28)] sm:text-2xl'>
+                        Bouwt aan veerkrachtige steden, wijken en organisaties. Voor duurzame ontwikkeling,
+                        zelforganisatie en inclusieve groei.
+                    </p>
                 </div>
             </section>
 
             <section id='over' className='bg-[#FDF5E2] px-5 py-12 sm:px-8 sm:py-20 lg:px-10'>
                 <div className='mx-auto grid max-w-7xl gap-8 sm:gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:items-center'>
                     <div className='max-w-2xl'>
-                        <p className='section-kicker'>Over Ibu Bos</p>
+                        <p className='section-kicker'>Over Maartje Bos</p>
                         <h2 className='mt-3 max-w-xl text-3xl font-extrabold leading-tight sm:mt-4 sm:text-6xl'>
-                            Groei begint bij wat mensen te bieden hebben.
+                            Groei begint bij het zien van veerkracht.
                         </h2>
                         <div className='mt-5 space-y-4 text-base leading-7 sm:mt-8 sm:space-y-6 sm:text-xl sm:leading-8'>
                             <p>
-                                Ibu Bos is ontstaan uit het verlangen van pionier, co-creator en community bouwer
-                                Maartje Bos naar een veerkrachtige samenleving waar ieders waarde zichtbaar wordt.
+                                Maartje richtte Ibu Bos op in 2016, vanuit een diep verlangen naar een inclusieve,
+                                duurzame en innovatieve samenleving.
+                            </p>
+                            <p className='border-l-4 border-[#E88A32] pl-4 font-bold italic'>
+                                “Een stad waar niet je afkomst of je milieu bepaalt wat je kunt bijdragen, maar wat
+                                je als mens te bieden hebt.”
                             </p>
                             <p>
-                                Ibu betekent groei in het Igbo. In het Indonesisch betekent Ibu moeder en krachtige
-                                vrouw: precies de combinatie van bedding, beweging en moed die in het werk centraal
-                                staat.
+                                Al 19 jaar werkt ze aan sociale en duurzame transities, democratisering,
+                                zelforganisatie en integrale gebiedsontwikkeling. Ze navigeert moeiteloos tussen
+                                overheid, bewoners, maatschappelijke organisaties, bedrijven en kennisinstellingen.
                             </p>
                         </div>
                     </div>
@@ -179,7 +185,7 @@ return (
                         <div>
                             <p className='section-kicker'>Werk met mij</p>
                             <h2 className='mt-3 text-3xl font-extrabold leading-tight sm:mt-4 sm:text-6xl'>
-                                Programma ontwikkeling, facilitering en veerkrachtstrategie.
+                                Vier expertisegebieden.
                             </h2>
                         </div>
                         <div className='space-y-4 text-base leading-7 sm:space-y-6 sm:text-xl sm:leading-8'>
@@ -276,42 +282,6 @@ return (
                             Bekijk onze projecten
                             <ArrowUpRight aria-hidden className='ml-2 h-5 w-5' />
                         </Link>
-                    </div>
-                </div>
-            </section>
-
-            <section id='projecten' className='bg-[#FDF5E2] px-5 py-12 sm:px-8 sm:py-20 lg:px-10'>
-                <div className='mx-auto grid max-w-7xl gap-8 sm:gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:items-center'>
-                    <div className='project-media'>
-                        <Image
-                            src='/images/lokaalgeld.webp'
-                            alt='Lokaal Geld Zuidoost'
-                            width={2500}
-                            height={1667}
-                            sizes='(max-width: 1024px) 100vw, 52vw'
-                            className='editorial-image'
-                        />
-                    </div>
-                    <div className='space-y-4 sm:space-y-6'>
-                        <p className='section-kicker'>Recent project</p>
-                        <h2 className='mt-3 text-3xl font-extrabold leading-tight sm:mt-4 sm:text-6xl'>
-                            Lokaal Geld Zuidoost laat zien hoe co-creatie waarde vasthoudt in de community.
-                        </h2>
-                        <p className='text-base leading-7 sm:text-xl sm:leading-8'>
-                            Vanuit de behoefte om te onderzoeken hoe meer waarde in de community kan blijven, bouwde
-                            Ibu Bos met partners een consortium op en schreef een manifest rond gedeelde waarden en een
-                            gezamenlijk droombeeld.
-                        </p>
-                        <a
-                            className='podcast-note'
-                            href='https://open.spotify.com/episode/1nYkOz5Y4Daz45F6ktqFYD?si=BHSynye4SMeUYt_RLLrVcg&dl_branch=1&nd=1'
-                            target='_blank'
-                            rel='noopener noreferrer'
-                            aria-label='Luister naar de podcast over Lokaal Geld Zuidoost op Spotify'
-                        >
-                            <Mic2 aria-hidden className='h-6 w-6' />
-                            Interesse in deze aanpak? Luister naar de podcast en de lessen uit het project.
-                        </a>
                     </div>
                 </div>
             </section>
