@@ -75,6 +75,7 @@ return (
                     loop
                     muted
                     playsInline
+                    poster='/images/homehero-poster.webp'
                     aria-label='Ibu Bos hero video'>
                     <source src='/images/homehero.webm' type='video/webm' />
                 </video>
@@ -88,10 +89,10 @@ return (
                         priority
                         className='h-56 w-56 drop-shadow-[0_2px_18px_rgba(0,0,0,0.28)] sm:h-64 sm:w-64 lg:h-72 lg:w-72'
                     />
-                    <p className='max-w-2xl text-xl font-bold leading-8 text-[#FDF5E2] drop-shadow-[0_2px_18px_rgba(0,0,0,0.28)] sm:text-2xl'>
+                    <h1 className='max-w-2xl text-xl font-bold leading-8 text-[#FDF5E2] drop-shadow-[0_2px_18px_rgba(0,0,0,0.28)] sm:text-2xl'>
                         Bouwt aan veerkrachtige steden, wijken en organisaties. Voor duurzame ontwikkeling,
                         zelforganisatie en inclusieve groei.
-                    </p>
+                    </h1>
                 </div>
             </section>
 

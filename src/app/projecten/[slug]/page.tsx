@@ -20,7 +20,13 @@ export const generateMetadata = async ({ params }: ProjectDetailPageProps): Prom
 
     return {
         title: `${project.title} | Ibu Bos`,
-        description: project.description
+        description: project.description,
+        openGraph: {
+            type: 'article',
+            title: project.title,
+            description: project.description,
+            images: [project.image]
+        }
     };
 };
 

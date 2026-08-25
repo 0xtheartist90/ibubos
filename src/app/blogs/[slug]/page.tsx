@@ -20,7 +20,13 @@ export const generateMetadata = async ({ params }: BlogDetailPageProps): Promise
 
     return {
         title: `${post.title} | Ibu Bos`,
-        description: post.description
+        description: post.description,
+        openGraph: {
+            type: 'article',
+            title: post.title,
+            description: post.description,
+            images: [post.image]
+        }
     };
 };
 

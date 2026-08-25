@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Mukta+Mahee:wght@400;500;600;700;800&display=swap");
 @import "tailwindcss";
 
 @plugin "tailwindcss-animate";
@@ -226,7 +225,7 @@
 
 @layer components {
   .font-brand {
-    font-family: "Mukta Mahee", var(--font-geist-sans), sans-serif;
+    font-family: var(--font-mukta), "Mukta Mahee", var(--font-geist-sans), sans-serif;
   }
 
   .text-brand-green {
