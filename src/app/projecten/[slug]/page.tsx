@@ -85,7 +85,7 @@ const ProjectDetailPage = async ({ params }: ProjectDetailPageProps) => {
                             <p>{project.outcome}</p>
                         </aside>
                         <Link href='mailto:maartje@ibubos.nl' className='brand-button detail-cta'>
-                            Bespreek een project
+                            Neem contact op over dit project
                         </Link>
                     </article>
                     <aside className='detail-sidebar'>

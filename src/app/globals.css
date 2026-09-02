@@ -713,6 +713,168 @@
     padding-top: 1rem;
   }
 
+  .project-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.5rem;
+    list-style: none;
+    margin-top: 0.6rem;
+    padding: 0;
+  }
+
+  .project-chip-wrap {
+    position: relative;
+  }
+
+  .project-chip {
+    background: rgba(232, 138, 50, 0.1);
+    border: 1px solid rgba(232, 138, 50, 0.35);
+    color: var(--ibu-green);
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-weight: 800;
+    padding: 0.3rem 0.55rem;
+    transition: background-color 160ms ease, border-color 160ms ease;
+  }
+
+  .project-chip:hover,
+  .project-chip--open {
+    background: rgba(232, 138, 50, 0.22);
+    border-color: var(--ibu-orange);
+  }
+
+  .project-chip__tip {
+    background: var(--ibu-cream);
+    border: 1px solid rgba(21, 88, 59, 0.25);
+    box-shadow: 0 0.9rem 2rem rgba(7, 45, 29, 0.16);
+    color: rgba(21, 88, 59, 0.85);
+    display: none;
+    font-size: 0.82rem;
+    font-weight: 600;
+    left: 0;
+    line-height: 1.45;
+    max-width: min(17rem, 78vw);
+    padding: 0.6rem 0.7rem;
+    position: absolute;
+    top: calc(100% + 0.35rem);
+    width: max-content;
+    z-index: 10;
+  }
+
+  /* Desktop: tooltip bij hover; touch-apparaten gebruiken de open-status. */
+  @media (hover: hover) and (pointer: fine) {
+    .project-chip-wrap:hover .project-chip__tip {
+      display: block;
+    }
+  }
+
+  .project-chip--open + .project-chip__tip {
+    display: block;
+  }
+
+  .speaking-section {
+    background: #f0f5ec;
+  }
+
+  .speaking-card {
+    background: var(--ibu-cream);
+    border: 1px solid rgba(21, 88, 59, 0.16);
+    display: grid;
+    grid-template-rows: auto 1fr;
+    overflow: hidden;
+  }
+
+  .speaking-card__image {
+    aspect-ratio: 16 / 10;
+    border-bottom: 1px solid rgba(21, 88, 59, 0.14);
+    height: auto;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .speaking-card__body {
+    align-content: start;
+    display: grid;
+    gap: 0.9rem;
+    padding: 1.5rem clamp(1.25rem, 3vw, 2rem) 1.75rem;
+  }
+
+  .speaking-card__body h3 {
+    font-size: clamp(1.5rem, 2.4vw, 2rem);
+    font-weight: 900;
+    line-height: 1.05;
+  }
+
+  .speaking-card__audience {
+    color: var(--ibu-orange);
+    font-weight: 800;
+  }
+
+  .speaking-card__body p {
+    line-height: 1.6;
+  }
+
+  .speaking-card__list-label {
+    color: rgba(21, 88, 59, 0.65);
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    margin-top: 0.25rem;
+    text-transform: uppercase;
+  }
+
+  .speaking-card__body ul {
+    display: grid;
+    gap: 0.4rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  .speaking-card__body li {
+    line-height: 1.5;
+    padding-left: 1.05rem;
+    position: relative;
+  }
+
+  .speaking-card__body li::before {
+    background: var(--ibu-orange);
+    border-radius: 999px;
+    content: '';
+    height: 0.4rem;
+    left: 0;
+    position: absolute;
+    top: 0.5em;
+    width: 0.4rem;
+  }
+
+  .speaking-card .brand-button {
+    justify-self: start;
+    margin-top: 0.5rem;
+  }
+
+  .speaking-proof {
+    background: rgba(253, 245, 226, 0.55);
+    border: 1px dashed rgba(21, 88, 59, 0.3);
+    display: grid;
+    gap: 0.35rem;
+    padding: 1.1rem 1.25rem;
+  }
+
+  .speaking-proof span {
+    color: var(--ibu-orange);
+    font-size: 0.74rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .speaking-proof p {
+    color: rgba(21, 88, 59, 0.65);
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+
   .project-media .photo-placeholder {
     aspect-ratio: 5 / 4;
   }

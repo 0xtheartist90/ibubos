@@ -5,15 +5,14 @@ import {
     Compass,
     Handshake,
     Leaf,
-    Mail,
     Map,
-    Phone,
     Sparkles,
     Sprout,
     Target,
     UsersRound
 } from 'lucide-react';
 
+import ExpertiseAreas from '@/components/content/ExpertiseAreas';
 import { getFeaturedBlog } from '@/lib/content/repository';
 
 const processSteps = ['Verkennen', 'Verbinden', 'Formeren', 'Creeren', 'Verduurzamen'];
@@ -28,33 +27,10 @@ const marqueeImages = [
     { src: '/images/Marquee/ibu7.webp', width: 1620, height: 1080 }
 ];
 
-const services = [
-    {
-        icon: Map,
-        title: 'Integrale gebiedsontwikkeling',
-        text: 'Masterplan Zuidoost · Arenapoort · G-Buurt Moving Forward'
-    },
-    {
-        icon: Leaf,
-        title: 'Energie & duurzaamheids-transities',
-        text: 'Gebiedsgericht SLIM · Energie van Utrecht · Donut Economie'
-    },
-    {
-        icon: UsersRound,
-        title: 'Sociale innovatie, participatie & democratisering',
-        text: 'Living Labs · buurtplatformen · fieldlabs · participatieverordening'
-    },
-    {
-        icon: Compass,
-        title: 'Circulaire economie & lokaal ondernemen',
-        text: '2PING (lokale munt) · Donut Deals · Meer Ondernemen'
-    }
-];
-
 const expectations = [
     { icon: Compass, text: 'Scherpe vragen' },
     { icon: Sparkles, text: 'Speelse energie' },
-    { icon: Target, text: 'Strategie naar actie' }
+    { icon: Target, text: 'Van strategie naar actie' }
 ];
 
 const resilienceThemes = [
@@ -182,14 +158,12 @@ return (
 
             <section id='aanbod' className='bg-[#FDF5E2] px-5 py-12 sm:px-8 sm:py-20 lg:px-10'>
                 <div className='mx-auto max-w-7xl'>
-                    <div className='grid gap-6 sm:gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:items-end'>
-                        <div>
-                            <p className='section-kicker'>Werk met mij</p>
-                            <h2 className='mt-3 text-3xl font-extrabold leading-tight sm:mt-4 sm:text-6xl'>
-                                Vier expertisegebieden.
-                            </h2>
-                        </div>
-                        <div className='space-y-4 text-base leading-7 sm:space-y-6 sm:text-xl sm:leading-8'>
+                    <p className='section-kicker'>Werk met mij</p>
+                    <div className='mt-3 grid gap-6 sm:mt-4 sm:gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:items-start'>
+                        <h2 className='text-3xl font-extrabold leading-tight sm:text-6xl'>
+                            Vier expertisegebieden.
+                        </h2>
+                        <div className='space-y-4 text-base leading-7 lg:pt-2 sm:space-y-6 sm:text-xl sm:leading-8'>
                             <p>
                                 Zoek je verdieping, een vernieuwende way of working of de volgende stap met je team?
                                 Maartje levert aanbod op maat en training in company.
@@ -210,19 +184,7 @@ return (
                     </div>
 
                     <div className='mt-8 grid gap-6 sm:mt-12 sm:gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch'>
-                        <div className='service-composition'>
-                            {services.map((service) => {
-                                const Icon = service.icon;
-
-                                return (
-                                    <div key={service.title} className='icon-panel'>
-                                        <Icon aria-hidden className='h-7 w-7 text-[#E88A32]' />
-                                        <h3>{service.title}</h3>
-                                        <p>{service.text}</p>
-                                    </div>
-                                );
-                            })}
-                        </div>
+                        <ExpertiseAreas />
                         <Image
                             src='/images/teammoment.webp'
                             alt='Ibu Bos teammoment'
@@ -231,6 +193,108 @@ return (
                             sizes='(max-width: 1024px) 100vw, 42vw'
                             className='editorial-image mobile-compact-image'
                         />
+                    </div>
+                </div>
+            </section>
+
+            <section id='spreken-trainen' className='speaking-section px-5 py-12 text-[#15583B] sm:px-8 sm:py-20 lg:px-10'>
+                <div className='mx-auto max-w-7xl'>
+                    <p className='section-kicker'>Spreken & trainen</p>
+                    <div className='mt-3 grid gap-6 sm:mt-4 sm:gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:items-start'>
+                        <h2 className='text-3xl font-extrabold leading-tight sm:text-6xl'>
+                            Anders kijken brengt beweging.
+                        </h2>
+                        <p className='max-w-xl text-base leading-7 lg:pt-2 sm:text-xl sm:leading-8'>
+                            Maartje Bos spreekt en verzorgt trainingen over veerkracht, gemeenschapskracht en
+                            verandering van binnenuit. Geen standaardverhaal van bovenaf, maar herkenbare
+                            praktijkervaringen, scherpe vragen en werkvormen die zichtbaar maken wat binnen een
+                            organisatie of gemeenschap al aanwezig is.
+                        </p>
+                    </div>
+
+                    <div className='mt-8 grid gap-6 sm:mt-12 sm:gap-8 lg:grid-cols-2'>
+                        <article className='speaking-card'>
+                            <Image
+                                src='/images/Marquee/ibu4.webp'
+                                alt='Maartje Bos in gesprek tijdens een bijeenkomst'
+                                width={1620}
+                                height={1080}
+                                sizes='(max-width: 1024px) 100vw, 48vw'
+                                className='speaking-card__image'
+                            />
+                            <div className='speaking-card__body'>
+                                <h3>Spreker</h3>
+                                <p className='speaking-card__audience'>
+                                    Voor congressen, bijeenkomsten, inspiratiesessies en maatschappelijke
+                                    programma&apos;s.
+                                </p>
+                                <p>
+                                    Maartje neemt haar publiek mee in een andere manier van kijken naar participatie,
+                                    samenwerking en systeemverandering. Met verhalen uit de praktijk maakt ze complexe
+                                    maatschappelijke vraagstukken menselijk en concreet.
+                                </p>
+                                <p className='speaking-card__list-label'>Mogelijke onderwerpen</p>
+                                <ul>
+                                    <li>Veerkracht zien waar systemen problemen zien</li>
+                                    <li>Van participatie naar werkelijk eigenaarschap</li>
+                                    <li>De kracht van gemeenschappen en informele netwerken</li>
+                                    <li>Frictie benutten als bron van verandering</li>
+                                    <li>Samenwerken tussen bewoners, overheid en organisaties</li>
+                                </ul>
+                                <a
+                                    className='brand-button'
+                                    href='mailto:maartje@ibubos.nl?subject=Uitnodiging%20als%20spreker'>
+                                    Nodig Maartje uit als spreker
+                                </a>
+                            </div>
+                        </article>
+
+                        <article className='speaking-card'>
+                            <Image
+                                src='/images/Marquee/ibu6.webp'
+                                alt='Deelnemers aan het werk tijdens een werksessie'
+                                width={1620}
+                                height={1080}
+                                sizes='(max-width: 1024px) 100vw, 48vw'
+                                className='speaking-card__image'
+                            />
+                            <div className='speaking-card__body'>
+                                <h3>Training & werksessies</h3>
+                                <p className='speaking-card__audience'>
+                                    Voor teams, overheden, maatschappelijke organisaties en samenwerkingsverbanden.
+                                </p>
+                                <p>
+                                    Geen training vanaf de zijlijn. Maartje werkt met concrete situaties uit de
+                                    praktijk en helpt deelnemers anders kijken, aanwezige kracht herkennen en
+                                    inzichten vertalen naar hun dagelijkse werk.
+                                </p>
+                                <p className='speaking-card__list-label'>Mogelijke vormen</p>
+                                <ul>
+                                    <li>Incompanytraining</li>
+                                    <li>Interactieve workshop</li>
+                                    <li>Strategische werksessie</li>
+                                    <li>Reflectie- of inspiratiesessie</li>
+                                    <li>Maatwerkprogramma voor teams en samenwerkingsverbanden</li>
+                                </ul>
+                                <a
+                                    className='brand-button'
+                                    href='mailto:maartje@ibubos.nl?subject=Training%20of%20werksessie'>
+                                    Bespreek een training of sessie
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+
+                    {/* Gereserveerde ruimte voor bewijs en geloofwaardigheid; inhoud volgt later. */}
+                    <div className='mt-8 grid gap-4 sm:mt-10 sm:grid-cols-2'>
+                        <div className='speaking-proof'>
+                            <span>Ervaringen</span>
+                            <p>Ruimte voor een korte testimonial van een opdrachtgever of deelnemer.</p>
+                        </div>
+                        <div className='speaking-proof'>
+                            <span>Samenwerkingen</span>
+                            <p>Ruimte voor namen of logo&apos;s van organisaties waarmee Maartje werkte.</p>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -259,7 +323,8 @@ return (
                         />
                         <p className='max-w-xl text-base leading-7 sm:text-xl sm:leading-8'>
                             Sta je aan het begin van een samenwerking, heb je een maatschappelijk vraagstuk of wil je
-                            een living lab bouwen? Ibu Bos helpt bij analyse, strategie en duurzame inbedding.
+                            een living lab bouwen? Ibu Bos helpt bij analyse, strategie, training en duurzame
+                            inbedding.
                         </p>
                     </div>
                     <div>
@@ -336,20 +401,21 @@ return (
                     <div>
                         <p className='section-kicker'>Contact</p>
                         <h2 className='mt-3 text-3xl font-extrabold leading-tight sm:text-6xl'>
-                            Zullen we samen kijken wat er nodig is?
+                            Benieuwd wat Maartje voor jouw organisatie kan betekenen?
                         </h2>
                         <p className='mt-4 max-w-xl text-base leading-7 sm:mt-5 sm:text-xl sm:leading-8'>
-                            Wil je sparren over een samenwerking, training of vraagstuk? Stuur een bericht en Maartje
-                            neemt contact met je op.
+                            Zoek je een spreker die een ander perspectief opent, een training die beweging brengt of
+                            begeleiding bij een complex maatschappelijk vraagstuk? Vertel waar je aan werkt. Dan
+                            kijken we samen welke vorm past.
                         </p>
-                        <div className='mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row'>
-                            <a className='brand-button' href='mailto:maartje@ibubos.nl'>
-                                <Mail aria-hidden className='mr-2 h-5 w-5' />
-                                Mail Maartje
+                        <div className='mt-6 flex flex-col flex-wrap gap-3 sm:mt-8 sm:flex-row'>
+                            <a className='brand-button' href='mailto:maartje@ibubos.nl?subject=Boeking%20als%20spreker'>
+                                Boek Maartje als spreker
                             </a>
-                            <a className='brand-button brand-button--outline' href='tel:+31619039645'>
-                                <Phone aria-hidden className='mr-2 h-5 w-5' />
-                                Bel direct
+                            <a
+                                className='brand-button brand-button--outline'
+                                href='mailto:maartje@ibubos.nl?subject=Training%20bespreken'>
+                                Bespreek een training
                             </a>
                         </div>
                     </div>
